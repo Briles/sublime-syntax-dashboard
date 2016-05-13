@@ -1,0 +1,113 @@
+.toolbar {
+  display: flex;
+
+  margin-bottom: 20px;
+  input {
+    flex-grow: 1;
+  }
+}
+
+.sort-bar {
+  padding-left: 20px;
+  .toggle {
+    margin: 0 12px;
+  }
+  span {
+    vertical-align: middle;
+
+    color: $slate;
+  }
+}
+
+.toggle {
+  display: inline-block;
+  overflow: hidden;
+
+  height: 40px;
+
+  vertical-align: middle;
+
+  border: 1px solid $slate;
+  border-radius: $--border-radius;
+  button {
+    font-size: 13px;
+    font-weight: 600;
+
+    height: 100%;
+    padding: 0 15px;
+
+    &.active {
+      color: white;
+      background-color: $slate;
+    }
+  }
+}
+
+.cta {
+  font-size: 13px;
+  font-weight: 600;
+
+  height: 40px;
+  padding: 0 15px;
+
+  transition: background-color 200ms ease-in-out;
+
+  color: white;
+  border-radius: $--border-radius;
+  background-color: $slate;
+  &:hover, &:active {
+    background-color: darken($slate, 13);
+  }
+}
+
+.scope-summary {
+  width: 100%;
+
+  border-collapse: collapse;
+  td {
+    padding: 0 20px;
+
+    border-left: 1px solid $grey;
+  }
+  thead {
+    font-weight: 600;
+
+    background: hsl(9, 0%, 95%);
+    tr, td {
+      border-color: #d0d0d0;
+    }
+  }
+  tr {
+    line-height: 50px;
+
+    border: 1px solid $grey;
+
+    &:nth-child(even) {
+      background-color: hsl(9, 0%, 98%);
+    }
+  }
+}
+
+.scope-measure {
+  width: 100px;
+
+  text-align: center;
+}
+
+
+@media screen and (max-width: 650px) {
+  .toolbar {
+    display: block;
+    input {
+      display: block;
+
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .sort-bar {
+    padding-top: 20px;
+    padding-left: 10px;
+  }
+}

@@ -1,0 +1,74 @@
+doctype html
+html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
+  head
+    base(href="/sublime-syntax-dashboard/")
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(http-equiv='content-type' content='text/html; charset=UTF-8')
+    title Sublime Syntax Dashboard
+    meta(
+      name='description'
+      content="Insights into Sublime Text's default syntaxes"
+    )
+    meta(name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1')
+    link(rel='icon' type='image/x-icon' href='favicon.ico')
+    link(href='main.min.css' rel='stylesheet' type='text/css' media='all')
+    link(
+      href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+      rel='stylesheet'
+      type='text/css'
+    )
+    if (release === false)
+      script(src="//localhost:35729/livereload.js" async)
+      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js")
+    else
+      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js")
+    script(src="main.min.js")
+  body
+    .catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
+    .header-wrapper.flex
+      .dropdown-container
+        button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
+        .dropdown-wrapper(ng-class="{active: navIsActive}")
+          ul.dropdown-menu(role="navigation")
+            li(
+              ng-repeat="syntax in syntaxes"
+              ng-click="fetchSyntaxData(syntax)"
+            ) {{syntax}}
+      span.fill
+      .stat-blocks
+        .stat-block(ng-repeat="(label, data) in aggregate")
+          h2 {{data}}
+          h3 {{label}}
+    .main-content
+      h1.main-heading Scopes
+      .toolbar
+        input(
+          type="search"
+          ng-model="scopeFilter"
+          placeholder="filter scopes"
+          aria-label="filter scopes"
+        )
+        .sort-bar
+          span order by
+          .toggle
+            button(
+              ng-click="scopeOrderBy = 'scope'"
+              ng-class="{active: scopeOrderBy === 'scope'}"
+            ) Scope
+            button(
+              ng-click="scopeOrderBy = 'count'"
+              ng-class="{active: scopeOrderBy === 'count'}"
+            ) Count
+          button.cta(ng-click="scopeOrderRev = scopeOrderRev === true ? false : true") Reverse Order
+      table.scope-summary
+        thead
+          tr
+            td Scope
+            td.scope-measure Count
+        tr.scope-summary-item(
+          ng-repeat="scope in report | orderBy:scopeOrderBy:scopeOrderRev | filter:scopeFilter track by $index"
+        )
+          td {{scope.scope}}
+          td.scope-measure
+            span(ng-if="scope.count > 1") {{scope.count}}

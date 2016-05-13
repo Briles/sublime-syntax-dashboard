@@ -1,0 +1,11 @@
+@mixin hidden {
+  visibility: hidden;
+
+  opacity: 0;
+}
+
+@mixin visible {
+  visibility: visible;
+
+  opacity: 1;
+}
