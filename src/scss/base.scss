@@ -39,6 +39,10 @@ svg {
   fill: currentColor;
 }
 
+rect {
+  shape-rendering: crispedges;
+}
+
 .clearfix {
   &::before, &::after {
     display: table;
@@ -50,14 +54,10 @@ svg {
   }
 }
 
-.main-content {
-  padding: 40px;
-}
-
 .main-heading {
   font-size: 24px;
 
-  margin-bottom: 40px;
+  padding: 40px 40px;
 }
 
 input {

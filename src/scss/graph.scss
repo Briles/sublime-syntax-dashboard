@@ -1,0 +1,63 @@
+.graph-wrapper {
+  margin-bottom: 40px;
+  padding: 40px;
+
+  border: 1px solid $offwhite-border;
+  border-right: 0;
+  border-left: 0;
+  background-color: lighten($offwhite, 2);
+}
+
+.graph-tile {
+  display: inline-block;
+
+  border: 1px solid $offwhite-border;
+  border-radius: $--border-radius;
+  background-color: white;
+}
+
+.graph-tile-header {
+  padding: 20px;
+  padding-bottom: 0;
+  h2 {
+    font-size: 15px;
+    font-weight: 600;
+
+    color: $text-color;
+  }
+}
+
+.graph-tile-body {
+  padding: 25px;
+}
+
+.bar {
+  rect {
+    fill: $accent-color;
+    + rect {
+      fill: darken($accent-color, 17);
+    }
+  }
+}
+
+.axis {
+  text {
+    font-size: 11px;
+
+    color: $slate;
+  }
+  &.x {
+    text {
+      text-anchor: middle;
+    }
+  }
+  &.y {
+    text {
+      text-anchor: end;
+    }
+  }
+  line {
+    shape-rendering: crispedges;
+    stroke: $grey;
+  }
+}

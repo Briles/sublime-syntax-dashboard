@@ -42,33 +42,63 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
           h3 {{label}}
     .main-content
       h1.main-heading Scopes
-      .toolbar
-        input(
-          type="search"
-          ng-model="scopeFilter"
-          placeholder="filter scopes"
-          aria-label="filter scopes"
-        )
-        .sort-bar
-          span order by
-          .toggle
-            button(
-              ng-click="scopeOrderBy = 'scope'"
-              ng-class="{active: scopeOrderBy === 'scope'}"
-            ) Scope
-            button(
-              ng-click="scopeOrderBy = 'count'"
-              ng-class="{active: scopeOrderBy === 'count'}"
-            ) Count
-          button.cta(ng-click="scopeOrderRev = scopeOrderRev === true ? false : true") Reverse Order
-      table.scope-summary
-        thead
-          tr
-            td Scope
-            td.scope-measure Count
-        tr.scope-summary-item(
-          ng-repeat="scope in report | orderBy:scopeOrderBy:scopeOrderRev | filter:scopeFilter track by $index"
-        )
-          td {{scope.scope}}
-          td.scope-measure
-            span(ng-if="scope.count > 1") {{scope.count}}
+      .graph-wrapper
+        .graph-tile
+          .graph-tile-header
+            h2 Scopes by Tag
+          .graph-tile-body
+            svg(ng-attr-width="{{graph.width}}" ng-attr-height="{{graph.graphHeight}}")
+              g(ng-attr-transform="translate({{graph.graphOffset}},0)")
+                g.axis.y
+                  g.tick(
+                    ng-repeat="tick in graph.axis.y"
+                    ng-attr-transform="translate(0,{{tick.y}})"
+                  )
+                    line(ng-attr-x2="{{tick.lineLength}}" y2="0")
+                    text(x="-3" y="0" dy=".32em") {{tick.label}}
+                g.bar(
+                  ng-attr-transform="translate({{graph.barX($index)}}, 0)"
+                  ng-repeat="stat in graph.data|orderBy:false:true"
+                )
+                  rect(
+                    width="15"
+                    ng-attr-height="{{graph.barHeight(stat.count)}}"
+                    ng-attr-y="{{graph.barY(stat.count)}}"
+                  )
+                  rect(
+                    width="15"
+                    ng-attr-height="{{graph.barHeight(stat.unique_count)}}"
+                    ng-attr-y="{{graph.barY(stat.unique_count)}}"
+                  )
+                  title {{stat.tag}}: {{stat.count}} total , {{stat.unique_count}} unique
+      .scopes-wrapper
+        .toolbar
+          input(
+            type="search"
+            ng-model="scopeFilter"
+            placeholder="filter scopes"
+            aria-label="filter scopes"
+          )
+          .sort-bar
+            span order by
+            .toggle
+              button(
+                ng-click="scopeOrderBy = 'scope'"
+                ng-class="{active: scopeOrderBy === 'scope'}"
+              ) Scope
+              button(
+                ng-click="scopeOrderBy = 'count'"
+                ng-class="{active: scopeOrderBy === 'count'}"
+              ) Count
+            button.cta(ng-click="scopeOrderRev = scopeOrderRev === true ? false : true") Reverse Order
+        table.scope-summary
+          thead
+            tr
+              td Scope
+              td.scope-measure Count
+          tr.scope-summary-item(
+            ng-repeat="scope in report | orderBy:scopeOrderBy:scopeOrderRev | filter:scopeFilter track by $index"
+          )
+            td {{scope.scope}}
+            td.scope-measure
+              span(ng-if="scope.count > 1") {{scope.count}}

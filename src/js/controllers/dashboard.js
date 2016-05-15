@@ -2,6 +2,7 @@ module.exports = function ($scope, $http, $location) {
   'use strict';
 
   var lsCacheKey = 'ssdash_syntax_cache';
+  var Graph = require('../lib/graph.js');
   var cdnFragment = 'https://cdn.rawgit.com/Briles/sublime-syntax-dashboard/gh-pages/src/data/';
 
   $scope.syntaxes = require('../../data/syntaxes.js');
@@ -34,6 +35,14 @@ module.exports = function ($scope, $http, $location) {
   function setSyntaxData(name) {
     $scope.navIsActive = false;
     $scope.syntaxData = $scope.allData[name];
+    var historicalData = $scope.syntaxData.history;
+    var scopesCountGraph = new Graph.Bar({
+      data: historicalData.scope_counts,
+    });
+    scopesCountGraph.makeYAxis({
+      scale: 5,
+    });
+    $scope.graph = scopesCountGraph;
     $scope.syntax = $scope.syntaxData.name;
     $location.path($scope.syntax);
     var scopes = $scope.syntaxData.scopes;
