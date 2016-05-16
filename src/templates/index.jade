@@ -45,7 +45,13 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
       .graph-wrapper
         .graph-tile
           .graph-tile-header
-            h2 Scopes by Tag
+            h2 Scopes by Release
+            span.fill
+            dl.legend
+              dt scopes
+              dd
+              dt unique scopes
+              dd
           .graph-tile-body
             svg(ng-attr-width="{{graph.width}}" ng-attr-height="{{graph.graphHeight}}")
               g(ng-attr-transform="translate({{graph.graphOffset}},0)")

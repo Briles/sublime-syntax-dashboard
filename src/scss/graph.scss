@@ -17,6 +17,8 @@
 }
 
 .graph-tile-header {
+  display: flex;
+
   padding: 20px;
   padding-bottom: 0;
   h2 {
@@ -35,7 +37,7 @@
   rect {
     fill: $accent-color;
     + rect {
-      fill: darken($accent-color, 17);
+      fill: $accent-color-darker;
     }
   }
 }
@@ -59,5 +61,35 @@
   line {
     shape-rendering: crispedges;
     stroke: $grey;
+  }
+}
+
+.legend {
+  display: block;
+  dt {
+    font-size: 12px;
+
+    display: inline;
+
+    margin-right: 8px;
+
+    color: $slate;
+  }
+  dd {
+    display: inline-block;
+
+    width: 10px;
+    height: 10px;
+    margin-right: 16px;
+
+    vertical-align: middle;
+
+    background-color: $accent-color;
+    &:nth-of-type(2) {
+      background-color: $accent-color-darker;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
