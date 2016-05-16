@@ -26,7 +26,7 @@
 
     this.height = 100;
     this.graphHeight = this.height + 10;
-    this.width = this.data.length * this.barTotalWidth + this.totalOffset;
+    this.width = this.data.length * this.barTotalWidth + this.totalOffset - this.barMargin;
     this.max = findMax(this.data, 'count');
     this.axis = {};
 

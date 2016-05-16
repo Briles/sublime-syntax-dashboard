@@ -67,12 +67,12 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
                   ng-repeat="stat in graph.data|orderBy:false:true"
                 )
                   rect(
-                    width="15"
+                    ng-attr-width="{{graph.barWidth}}"
                     ng-attr-height="{{graph.barHeight(stat.count)}}"
                     ng-attr-y="{{graph.barY(stat.count)}}"
                   )
                   rect(
-                    width="15"
+                    ng-attr-width="{{graph.barWidth}}"
                     ng-attr-height="{{graph.barHeight(stat.unique_count)}}"
                     ng-attr-y="{{graph.barY(stat.unique_count)}}"
                   )
