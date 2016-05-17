@@ -36,13 +36,14 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
               ng-repeat="syntax in syntaxes"
               ng-click="fetchSyntaxData(syntax)"
             ) {{syntax}}
-      span.fill
-      .stat-blocks
-        .stat-block(ng-repeat="(label, data) in aggregate")
-          h2 {{data}}
-          h3 {{label}}
     .main-content
-      h1.main-heading Scopes
+      .page-header
+        h1 Scopes
+        span.fill
+        .stat-blocks
+          .stat-block(ng-repeat="(label, data) in aggregate")
+            h2 {{data}}
+            h3 {{label}}
       .graph-wrapper
         .graph-tile
           .graph-tile-header
