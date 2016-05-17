@@ -65,6 +65,7 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
                 g.bar(
                   ng-attr-transform="translate({{graph.barX($index)}}, 0)"
                   ng-repeat="stat in graph.data|orderBy:false:true"
+                  svg-tooltip="<strong>{{stat.tag}}</strong>: <strong>{{stat.count}}</strong> total, <strong>{{stat.unique_count}}</strong> unique"
                 )
                   rect(
                     ng-attr-width="{{graph.barWidth}}"
@@ -76,7 +77,6 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
                     ng-attr-height="{{graph.barHeight(stat.unique_count)}}"
                     ng-attr-y="{{graph.barY(stat.unique_count)}}"
                   )
-                  title {{stat.tag}}: {{stat.count}} total , {{stat.unique_count}} unique
       .scopes-wrapper
         .toolbar
           input(
@@ -108,3 +108,4 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
             td {{scope.scope}}
             td.scope-measure
               span(ng-if="scope.count > 1") {{scope.count}}
+    .svg-tooltip

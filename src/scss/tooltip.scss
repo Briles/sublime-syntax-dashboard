@@ -1,0 +1,28 @@
+.svg-tooltip {
+  font-size: 12px;
+
+  position: absolute;
+
+  display: none;
+
+  padding: 3px 10px;
+
+  color: $tooltip-foreground;
+  border-radius: $--border-radius;
+  background-color: $tooltip-background;
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+    transform: translateX(-50%);
+
+    color: $tooltip-background;
+    border: 5px solid transparent;
+    border-top-color: $tooltip-background;
+  }
+}
