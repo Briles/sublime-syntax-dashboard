@@ -32,8 +32,8 @@ module.exports = function () {
         var tooltipWidth = tooltipEl.offsetWidth;
         var boundElDim = rawEl.getBoundingClientRect();
 
-        var top = boundElDim.top - tooltipHeight - 5;
-        var left = boundElDim.left + boundElDim.width / 2 - tooltipWidth / 2;
+        var top = boundElDim.top - tooltipHeight - 5 + window.pageYOffset;
+        var left = boundElDim.left + boundElDim.width / 2 - tooltipWidth / 2 + window.pageXOffset;
 
         tooltipStyle.left = left + 'px';
         tooltipStyle.top = top + 'px';
