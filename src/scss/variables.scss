@@ -2,11 +2,11 @@
 $offwhite: hsl(219, 30%, 97%);
 $offwhite-border: hsl(220, 12%, 89%);
 $text-color: hsl(200, 15%, 20%);
-$primary-color: #6695eb;
-$accent-color: #66ebbc;
+$primary-color: hsl(219, 77%, 66%);
+$accent-color: nth(tetrad($primary-color), 1);
 $accent-color-darker: darken($accent-color, 17);
 $slate: hsl(219, 11%, 67%);
-$grey: #e0e0e0;
+$grey: hsl(218, 0%, 88%);
 $tooltip-foreground: $offwhite;
 $tooltip-background: $text-color;
 

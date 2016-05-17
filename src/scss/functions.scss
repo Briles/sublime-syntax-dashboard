@@ -1,0 +1,3 @@
+@function tetrad($color) {
+  @return adjust-hue($color, -60) $color adjust-hue($color, 120) complement($color);
+}
