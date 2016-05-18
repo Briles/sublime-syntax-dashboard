@@ -95,6 +95,24 @@ module.exports = function ($scope, $http, $location) {
     return report;
   }
 
+  $scope.sortStatus = function (key) {
+    var isCurrentKey = $scope.scopeOrderBy === key;
+    return {
+      asc: isCurrentKey && !$scope.scopeOrderRev,
+      desc: isCurrentKey && $scope.scopeOrderRev,
+    };
+  };
+
+  $scope.orderBy = function (key) {
+    if ($scope.scopeOrderBy === key) {
+      $scope.scopeOrderRev = $scope.scopeOrderRev === true ? false : true;
+    } else {
+      $scope.scopeOrderRev = false;
+    }
+
+    $scope.scopeOrderBy = key;
+  };
+
   $scope.toggleNav = function () {
     $scope.navIsActive = $scope.navIsActive === true ? false : true;
   };

@@ -1,62 +1,7 @@
 .toolbar {
-  display: flex;
-
   margin-bottom: 20px;
   input {
-    flex-grow: 1;
-  }
-}
-
-.sort-bar {
-  padding-left: 20px;
-  .toggle {
-    margin: 0 12px;
-  }
-  span {
-    vertical-align: middle;
-
-    color: $slate;
-  }
-}
-
-.toggle {
-  display: inline-block;
-  overflow: hidden;
-
-  height: 40px;
-
-  vertical-align: middle;
-
-  border: 1px solid $slate;
-  border-radius: $--border-radius;
-  button {
-    font-size: 13px;
-    font-weight: 600;
-
-    height: 100%;
-    padding: 0 15px;
-
-    &.active {
-      color: white;
-      background-color: $slate;
-    }
-  }
-}
-
-.cta {
-  font-size: 13px;
-  font-weight: 600;
-
-  height: 40px;
-  padding: 0 15px;
-
-  transition: background-color 200ms ease-in-out;
-
-  color: white;
-  border-radius: $--border-radius;
-  background-color: $slate;
-  &:hover, &:active {
-    background-color: darken($slate, 13);
+    width: 410px;
   }
 }
 
@@ -88,6 +33,44 @@
   }
 }
 
+.table-sort-button {
+  position: relative;
+
+  padding-right: 18px;
+
+  &::before, &::after {
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    margin-top: -2px;
+
+    content: '';
+    transition: all 200ms ease-in-out;
+
+    opacity: .27;
+    border-style: solid;
+  }
+
+  &::before {
+    transform: translateY(-85%);
+
+    border-width: 0 5px 5px;
+    border-color: transparent transparent $text-color;
+  }
+
+  &::after {
+    transform: translateY(85%);
+
+    border-width: 5px 5px 0;
+    border-color: $text-color transparent transparent;
+  }
+
+  &.asc::before, &.desc::after {
+    opacity: 1;
+  }
+}
+
 .scope-measure {
   width: 100px;
 
@@ -108,10 +91,5 @@
       width: 100%;
       max-width: 100%;
     }
-  }
-
-  .sort-bar {
-    padding-top: 20px;
-    padding-left: 10px;
   }
 }
