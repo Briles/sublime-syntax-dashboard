@@ -27,7 +27,7 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js")
   body
     .catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
-    .header-wrapper.flex
+    .header-wrapper
       .dropdown-container
         button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
         .dropdown-wrapper(ng-class="{active: navIsActive}")
@@ -37,48 +37,47 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
               ng-click="fetchSyntaxData(syntax)"
             ) {{syntax}}
     .main-content
-      .page-header
+      .page-header.flex
         h1 Scopes
-        span.fill
         .stat-blocks
           .stat-block(ng-repeat="(label, data) in aggregate")
             h2 {{data}}
             h3 {{label}}
-      .graph-wrapper
-        .graph-tile
-          .graph-tile-header
-            h2 Scopes by Release
-            span.fill
-            dl.legend
-              dt scopes
-              dd
-              dt unique scopes
-              dd
-          .graph-tile-body
-            svg(ng-attr-width="{{graph.width}}" ng-attr-height="{{graph.graphHeight}}")
-              g(ng-attr-transform="translate({{graph.graphOffset}},0)")
-                g.axis.y
-                  g.tick(
-                    ng-repeat="tick in graph.axis.y"
-                    ng-attr-transform="translate(0,{{tick.y}})"
+      .graph-wrapper.flex
+        .graph-tile-wrapper
+          .graph-tile
+            .graph-tile-header.flex
+              h2 Scopes by Release
+              dl.legend
+                dt scopes
+                dd
+                dt unique scopes
+                dd
+            .graph-tile-body
+              svg(ng-attr-width="{{graph.width}}" ng-attr-height="{{graph.graphHeight}}")
+                g(ng-attr-transform="translate({{graph.graphOffset}},0)")
+                  g.axis.y
+                    g.tick(
+                      ng-repeat="tick in graph.axis.y"
+                      ng-attr-transform="translate(0,{{tick.y}})"
+                    )
+                      line(ng-attr-x2="{{tick.lineLength}}" y2="0")
+                      text(x="-3" y="0" dy=".32em") {{tick.label}}
+                  g.bar(
+                    ng-attr-transform="translate({{graph.barX($index)}}, 0)"
+                    ng-repeat="stat in graph.data|orderBy:false:true"
+                    svg-tooltip="<strong>{{stat.tag}}</strong>: <strong>{{stat.count}}</strong> total, <strong>{{stat.unique_count}}</strong> unique"
                   )
-                    line(ng-attr-x2="{{tick.lineLength}}" y2="0")
-                    text(x="-3" y="0" dy=".32em") {{tick.label}}
-                g.bar(
-                  ng-attr-transform="translate({{graph.barX($index)}}, 0)"
-                  ng-repeat="stat in graph.data|orderBy:false:true"
-                  svg-tooltip="<strong>{{stat.tag}}</strong>: <strong>{{stat.count}}</strong> total, <strong>{{stat.unique_count}}</strong> unique"
-                )
-                  rect(
-                    ng-attr-width="{{graph.barWidth}}"
-                    ng-attr-height="{{graph.barHeight(stat.count)}}"
-                    ng-attr-y="{{graph.barY(stat.count)}}"
-                  )
-                  rect(
-                    ng-attr-width="{{graph.barWidth}}"
-                    ng-attr-height="{{graph.barHeight(stat.unique_count)}}"
-                    ng-attr-y="{{graph.barY(stat.unique_count)}}"
-                  )
+                    rect(
+                      ng-attr-width="{{graph.barWidth}}"
+                      ng-attr-height="{{graph.barHeight(stat.count)}}"
+                      ng-attr-y="{{graph.barY(stat.count)}}"
+                    )
+                    rect(
+                      ng-attr-width="{{graph.barWidth}}"
+                      ng-attr-height="{{graph.barHeight(stat.unique_count)}}"
+                      ng-attr-y="{{graph.barY(stat.unique_count)}}"
+                    )
       .scopes-wrapper
         .toolbar
           input(

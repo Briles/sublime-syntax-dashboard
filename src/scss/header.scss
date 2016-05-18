@@ -18,7 +18,7 @@
 }
 
 .header-wrapper {
-  padding: 10px 40px;
+  padding: 10px $typical-distance;
 
   color: white;
   background-color: $primary-color;
@@ -32,13 +32,10 @@
 }
 
 .page-header {
-  display: flex;
-
-  padding: 20px 40px;
+  padding: 20px $typical-distance;
 
   h1 {
     font-size: 24px;
-    line-height: 60px;
   }
 }
 

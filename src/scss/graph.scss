@@ -1,11 +1,14 @@
 .graph-wrapper {
-  margin-bottom: 40px;
-  padding: 40px;
+  margin-bottom: $typical-distance;
 
   border: 1px solid $offwhite-border;
   border-right: 0;
   border-left: 0;
   background-color: lighten($offwhite, 2);
+}
+
+.graph-tile-wrapper {
+  padding: 40px;
 }
 
 .graph-tile {
@@ -17,8 +20,6 @@
 }
 
 .graph-tile-header {
-  display: flex;
-
   padding: 20px;
   padding-bottom: 0;
   h2 {
