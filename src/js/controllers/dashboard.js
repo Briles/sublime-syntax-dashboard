@@ -5,7 +5,7 @@ module.exports = function ($scope, $http, $location) {
   var Graph = require('../lib/graph.js');
 
   $scope.syntaxes = require('../lib/syntaxes.js');
-  $scope.allData = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
+  var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
 
   $scope.scopeFilter = '';
   $scope.scopeOrderBy = 'scope';
@@ -15,16 +15,16 @@ module.exports = function ($scope, $http, $location) {
     name = name.toLowerCase();
     name = name in $scope.syntaxes ? $scope.syntaxes[name] : 'ActionScript';
 
-    if (name in $scope.allData) {
+    if (name in syntaxCache) {
       setSyntaxData(name);
     } else {
       $http({
         method: 'GET',
         url: 'src/data/' + encodeURIComponent(name) + '.json',
       }).then(function successCallback(response) {
-        $scope.allData[name] = response.data;
+        syntaxCache[name] = response.data;
         setSyntaxData(name);
-        localStorage.setItem(lsCacheKey, angular.toJson($scope.allData));
+        localStorage.setItem(lsCacheKey, angular.toJson(syntaxCache));
       });
     }
   };
@@ -33,7 +33,9 @@ module.exports = function ($scope, $http, $location) {
 
   function setSyntaxData(name) {
     $scope.navIsActive = false;
-    $scope.syntaxData = $scope.allData[name];
+    $scope.syntaxData = syntaxCache[name];
+    $scope.syntax = $scope.syntaxData.name;
+    $location.path($scope.syntax);
     var historicalData = $scope.syntaxData.history;
     var scopesCountGraph = new Graph.Bar({
       data: historicalData.scope_counts,
@@ -42,8 +44,6 @@ module.exports = function ($scope, $http, $location) {
       scale: 5,
     });
     $scope.graph = scopesCountGraph;
-    $scope.syntax = $scope.syntaxData.name;
-    $location.path($scope.syntax);
     var scopes = $scope.syntaxData.scopes;
     $scope.aggregate = {
       scopes: scopes.length,
