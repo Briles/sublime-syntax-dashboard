@@ -30,9 +30,10 @@ module.exports = function () {
         tooltip.hide();
         var tooltipHeight = tooltipEl.offsetHeight;
         var tooltipWidth = tooltipEl.offsetWidth;
+        var tooltipOffset = 3;
         var boundElDim = rawEl.getBoundingClientRect();
 
-        var top = boundElDim.top - tooltipHeight - 5 + window.pageYOffset;
+        var top = boundElDim.top - tooltipHeight - 5 - tooltipOffset + window.pageYOffset;
         var left = boundElDim.left + boundElDim.width / 2 - tooltipWidth / 2 + window.pageXOffset;
 
         tooltipStyle.left = left + 'px';
