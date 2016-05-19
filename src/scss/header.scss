@@ -51,20 +51,23 @@
   text-align: center;
   h2 {
     font-size: 21px;
-    &.gt, &.lt, &.eq {
-      &::after {
-        display: inline-block;
 
-        margin-top: -2px;
-        margin-left: 5px;
+    position: relative;
+    &::after {
+      position: absolute;
+      top: 50%;
 
-        content: '';
-        transition: all 200ms ease-in-out;
-        vertical-align: middle;
+      display: inline-block;
 
-        border-width: 0;
-        border-style: solid;
-      }
+      margin-top: -2px;
+      margin-left: 5px;
+
+      content: '';
+      transition: all 200ms ease-in-out;
+      vertical-align: middle;
+
+      border-width: 0;
+      border-style: solid;
     }
     &.gt::after {
       border-width: 0 5px 5px;
