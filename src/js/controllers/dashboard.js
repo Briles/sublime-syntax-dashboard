@@ -3,7 +3,6 @@ module.exports = function ($scope, $http, $location) {
 
   var lsCacheKey = 'ssdash_syntax_cache';
   var Graph = require('../lib/graph.js');
-  var cdnFragment = 'https://cdn.rawgit.com/Briles/sublime-syntax-dashboard/gh-pages/src/data/';
 
   $scope.syntaxes = require('../lib/syntaxes.js');
   $scope.allData = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
@@ -21,7 +20,7 @@ module.exports = function ($scope, $http, $location) {
     } else {
       $http({
         method: 'GET',
-        url: cdnFragment + encodeURIComponent(name) + '.json',
+        url: 'src/data/' + encodeURIComponent(name) + '.json',
       }).then(function successCallback(response) {
         $scope.allData[name] = response.data;
         setSyntaxData(name);
