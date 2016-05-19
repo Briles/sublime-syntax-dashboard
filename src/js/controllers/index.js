@@ -5,4 +5,5 @@ var app = angular.module('syntaxDash', ['angular-loading-bar'])
   }, ]);
 
 app.controller('syntaxDashCtrl', require('./dashboard.js'))
-  .directive('svgTooltip', require('../directives/tooltip.js'));
+  .directive('svgTooltip', require('../directives/tooltip.js'))
+  .directive('aggStat', require('../directives/agg-stat.js'));

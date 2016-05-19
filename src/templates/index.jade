@@ -40,9 +40,7 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
       .page-header.flex
         h1 Scopes
         .stat-blocks
-          .stat-block(ng-repeat="(label, data) in aggregate")
-            h2 {{data}}
-            h3 {{label}}
+          .stat-block(agg-stat ng-repeat="(label, data) in aggregate")
       .graph-wrapper.flex
         .graph-tile-wrapper
           .graph-tile

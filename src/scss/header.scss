@@ -51,6 +51,36 @@
   text-align: center;
   h2 {
     font-size: 21px;
+    &.gt, &.lt, &.eq {
+      &::after {
+        display: inline-block;
+
+        margin-top: -2px;
+        margin-left: 5px;
+
+        content: '';
+        transition: all 200ms ease-in-out;
+        vertical-align: middle;
+
+        border-width: 0;
+        border-style: solid;
+      }
+    }
+    &.gt::after {
+      border-width: 0 5px 5px;
+      border-color: transparent transparent $accent-color;
+    }
+    &.lt::after {
+      border-width: 5px 5px 0;
+      border-color: $red transparent transparent;
+    }
+    &.eq::after {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+      background-color: $slate;
+    }
   }
   h3 {
     font-weight: 200;
