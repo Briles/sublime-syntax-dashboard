@@ -94,6 +94,11 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
                 ) Scope
               td.scope-measure
                 button.table-sort-button(
+                  ng-click="orderBy('specificity')"
+                  ng-class="sortStatus('specificity')"
+                ) Specificity
+              td.scope-measure
+                button.table-sort-button(
                   ng-click="orderBy('count')"
                   ng-class="sortStatus('count')"
                 ) Count
@@ -101,6 +106,8 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
             ng-repeat="scope in report | orderBy:scopeOrderBy:scopeOrderRev | filter:scopeFilter track by $index"
           )
             td {{scope.scope}}
+            td.scope-measure
+              span(ng-if="scope.specificity > 1") {{scope.specificity}}
             td.scope-measure
               span(ng-if="scope.count > 1") {{scope.count}}
     .svg-tooltip

@@ -87,6 +87,7 @@ module.exports = function ($scope, $http, $location) {
         report.push({
           scope: scope,
           count: 1,
+          specificity: scope.split('.').length,
         });
       } else {
         report[objIdx].count += 1;
