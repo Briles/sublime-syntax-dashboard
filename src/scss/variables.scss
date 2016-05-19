@@ -5,6 +5,7 @@ $text-color: hsl(200, 15%, 20%);
 $primary-color: hsl(219, 77%, 66%);
 $accent-color: nth(tetrad($primary-color), 1);
 $accent-color-darker: darken($accent-color, 17);
+$red: nth(split-complement($primary-color), 3);
 $slate: hsl(219, 11%, 67%);
 $grey: hsl(218, 0%, 88%);
 $tooltip-foreground: $offwhite;

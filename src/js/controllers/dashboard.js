@@ -5,7 +5,7 @@ module.exports = function ($scope, $http, $location) {
   var Graph = require('../lib/graph.js');
   var cdnFragment = 'https://cdn.rawgit.com/Briles/sublime-syntax-dashboard/gh-pages/src/data/';
 
-  $scope.syntaxes = require('../../data/syntaxes.js');
+  $scope.syntaxes = require('../lib/syntaxes.js');
   $scope.allData = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
 
   $scope.scopeFilter = '';
@@ -49,6 +49,7 @@ module.exports = function ($scope, $http, $location) {
     $scope.aggregate = {
       scopes: scopes.length,
       unique: uniq(scopes).length,
+      'avg. specificity': specificity(scopes),
     };
     $scope.report = generateReport(scopes);
   }
@@ -93,6 +94,16 @@ module.exports = function ($scope, $http, $location) {
     });
 
     return report;
+  }
+
+  function specificity(scopes) {
+    var specificity = 0;
+
+    angular.forEach(scopes, function (scope) {
+      specificity += scope.split('.').length;
+    });
+
+    return Math.round(specificity / scopes.length, 2);
   }
 
   $scope.sortStatus = function (key) {

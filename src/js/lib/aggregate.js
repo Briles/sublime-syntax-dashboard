@@ -1,0 +1,1 @@
+module.exports={"scopes":110,"unique":50,"avg. specificity":4};
