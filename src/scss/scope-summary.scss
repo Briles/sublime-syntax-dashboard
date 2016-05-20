@@ -87,15 +87,3 @@
 
   text-align: center;
 }
-
-@media screen and (max-width: 650px) {
-  .toolbar {
-    display: block;
-    input {
-      display: block;
-
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-}

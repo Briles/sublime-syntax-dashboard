@@ -78,3 +78,58 @@
     border-left: 1px solid $block-border;
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .at-a-glance {
+    padding-right: $typical-distance;
+    padding-left: $typical-distance;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .stat-blocks {
+    flex-wrap: wrap;
+  }
+
+  .stat-block {
+    min-width: 25%;
+    padding-bottom: $typical-distance * 1.5;
+    h2 {
+      border: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+      h2 {
+        border: inherit;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .stat-block {
+    h3 {
+      font-size: 13px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .stat-block {
+    padding-top: $typical-distance / 2;
+    padding-bottom: $typical-distance / 2;
+
+    border-top: 1px solid $offwhite-border;
+    &:last-child {
+      h2 {
+        border: 0;
+      }
+    }
+    &:first-child {
+      border-top: 0;
+    }
+  }
+}
