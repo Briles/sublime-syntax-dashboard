@@ -32,10 +32,8 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
         button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
         .dropdown-wrapper(ng-class="{active: navIsActive}")
           ul.dropdown-menu(role="navigation")
-            li(
-              ng-repeat="syntax in syntaxes"
-              ng-click="fetchSyntaxData(syntax)"
-            ) {{syntax}}
+            li(ng-repeat="syntax in syntaxes")
+              a(ng-href="#/{{syntax | encodeURIComponent}}") {{syntax}}
     .main-content
       .at-a-glance
         .stat-blocks

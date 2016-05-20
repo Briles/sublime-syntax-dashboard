@@ -2,6 +2,7 @@ module.exports = function ($scope, $http, $location) {
   'use strict';
 
   var lsCacheKey = 'ssdash_syntax_cache';
+  var angular = window.angular;
 
   $scope.syntaxes = require('../lib/syntaxes.js');
   var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
@@ -10,7 +11,20 @@ module.exports = function ($scope, $http, $location) {
   $scope.scopeOrderBy = 'scope';
   $scope.scopeOrderRev = false;
 
-  $scope.fetchSyntaxData = function (name) {
+  function setSyntaxData(name) {
+    $scope.navIsActive = false;
+    $scope.syntaxData = syntaxCache[name];
+    $scope.syntax = $scope.syntaxData.name;
+    $location.path($scope.syntax);
+
+    var aggregate = angular.copy($scope.syntaxData.history.last());
+    delete aggregate.tag;
+    $scope.aggregate = aggregate;
+
+    $scope.report = generateReport($scope.syntaxData.scopes);
+  }
+
+  function fetchSyntaxData(name) {
     name = name.toLowerCase();
     name = name in $scope.syntaxes ? $scope.syntaxes[name] : 'ActionScript';
 
@@ -26,22 +40,12 @@ module.exports = function ($scope, $http, $location) {
         localStorage.setItem(lsCacheKey, angular.toJson(syntaxCache));
       });
     }
-  };
-
-  $scope.fetchSyntaxData($location.path().slice(1));
-
-  function setSyntaxData(name) {
-    $scope.navIsActive = false;
-    $scope.syntaxData = syntaxCache[name];
-    $scope.syntax = $scope.syntaxData.name;
-    $location.path($scope.syntax);
-
-    var aggregate = angular.copy($scope.syntaxData.history.slice(-1)[0]);
-    delete aggregate.tag;
-    $scope.aggregate = aggregate;
-
-    $scope.report = generateReport($scope.syntaxData.scopes);
   }
+
+  $scope.$on('$locationChangeSuccess',
+    function (e, url) {
+      fetchSyntaxData(decodeURIComponent(url.split('/').last()));
+    });
 
   function indexOfObject(arr, key, val) {
     var idx = -1;
@@ -94,5 +98,9 @@ module.exports = function ($scope, $http, $location) {
 
   $scope.toggleNav = function () {
     $scope.navIsActive = $scope.navIsActive === true ? false : true;
+  };
+
+  Array.prototype.last = function () {
+    return this.slice(-1)[0];
   };
 };
