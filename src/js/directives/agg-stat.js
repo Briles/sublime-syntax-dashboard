@@ -1,39 +1,35 @@
-module.exports = function () {
+module.exports = function ($compile) {
   'use strict';
 
-  var aggregateData = require('../lib/aggregate.js');
-
-  function compare(a, b) {
-    return a - b;
-  }
-
-  function mapClass(a, b) {
-    var comparison = compare(a, b);
-    var result = 'eq';
-
-    if (comparison < 0) {
-      result = 'gt';
-    } else if (comparison > 0) {
-      result = 'lt';
-    }
-
-    return result;
-  }
+  var Graph = require('../lib/graph.js');
 
   return {
     restrict: 'A',
-    link: function (scope, element) {
-      scope.$watch(
+    link: function ($scope, $element) {
+      $scope.$watch(
         function () {
-          return scope.data;
+          return $scope.data;
         },
 
         function () {
-          element.empty();
-          var label = scope.label;
-          var data = scope.data;
-          var value = '<h2 class="' + mapClass(aggregateData[label], data) + '">' + data + '</h2>';
-          element.append(value).append('<h3>' + label + '</h3>');
+          var labelVal = $scope.label;
+
+          var graphConf = {
+            data: $scope.syntaxData.history,
+            height: 40,
+            barMargin: 4,
+            barWidth: 4,
+            xProp: 'tag',
+            yProp: labelVal,
+          };
+          var graph = new Graph.Bar(graphConf);
+          graph.setColor($scope.$index);
+
+          $element
+            .empty()
+            .append('<h3>' + labelVal + '</h3>')
+            .append('<h2>' + $scope.data + '</h2>')
+            .append($compile(graph.build())($scope)[0]);
         });
     },
   };

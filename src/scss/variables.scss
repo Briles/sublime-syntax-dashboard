@@ -1,15 +1,23 @@
 // Palette
-$offwhite: hsl(219, 30%, 97%);
-$offwhite-border: hsl(220, 12%, 89%);
+$offwhite: hsl(219, 30%, 98%);
+$offwhite-border: hsl(220, 12%, 87%);
 $text-color: hsl(200, 15%, 20%);
 $primary-color: hsl(219, 77%, 66%);
 $accent-color: nth(tetrad($primary-color), 1);
-$accent-color-darker: darken($accent-color, 17);
 $red: nth(split-complement($primary-color), 3);
-$slate: hsl(219, 11%, 67%);
-$grey: hsl(218, 0%, 88%);
+$slate: hsl(219, 7%, 65%);
 $tooltip-foreground: $offwhite;
 $tooltip-background: $text-color;
+$graph-colors: (
+  'green': $accent-color,
+  'orange': nth(tetrad($primary-color), 4),
+  'purple': nth(analogous($primary-color), 3),
+  'aqua': nth(analogous($primary-color), 1),
+  'pink': nth(tetrad($primary-color), 3),
+  'red': $red,
+  'lime': nth(triad($primary-color), 1),
+  'yellow': nth(split-complement($primary-color), 1),
+);
 
 //
 $--font-stack-sans: 'Open Sans', sans-serif;

@@ -2,7 +2,6 @@ module.exports = function ($scope, $http, $location) {
   'use strict';
 
   var lsCacheKey = 'ssdash_syntax_cache';
-  var Graph = require('../lib/graph.js');
 
   $scope.syntaxes = require('../lib/syntaxes.js');
   var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
@@ -36,33 +35,12 @@ module.exports = function ($scope, $http, $location) {
     $scope.syntaxData = syntaxCache[name];
     $scope.syntax = $scope.syntaxData.name;
     $location.path($scope.syntax);
-    var historicalData = $scope.syntaxData.history;
-    var scopesCountGraph = new Graph.Bar({
-      data: historicalData.scope_counts,
-    });
-    scopesCountGraph.makeYAxis({
-      scale: 5,
-    });
-    $scope.graph = scopesCountGraph;
-    var scopes = $scope.syntaxData.scopes;
-    $scope.aggregate = {
-      scopes: scopes.length,
-      unique: uniq(scopes).length,
-      'avg. specificity': specificity(scopes),
-    };
-    $scope.report = generateReport(scopes);
-  }
 
-  function uniq(arr) {
-    var newArr = [];
+    var aggregate = angular.copy($scope.syntaxData.history.slice(-1)[0]);
+    delete aggregate.tag;
+    $scope.aggregate = aggregate;
 
-    angular.forEach(arr, function (el) {
-      if (newArr.indexOf(el) === -1) {
-        newArr.push(el);
-      }
-    });
-
-    return newArr;
+    $scope.report = generateReport($scope.syntaxData.scopes);
   }
 
   function indexOfObject(arr, key, val) {
@@ -94,16 +72,6 @@ module.exports = function ($scope, $http, $location) {
     });
 
     return report;
-  }
-
-  function specificity(scopes) {
-    var specificity = 0;
-
-    angular.forEach(scopes, function (scope) {
-      specificity += scope.split('.').length;
-    });
-
-    return Math.round(specificity / scopes.length, 2);
   }
 
   $scope.sortStatus = function (key) {

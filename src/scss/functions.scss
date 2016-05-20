@@ -5,3 +5,11 @@
 @function split-complement($color) {
   @return adjust-hue($color, -150) $color adjust-hue($color, 150);
 }
+
+@function analogous($color) {
+  @return adjust-hue($color, -30) $color adjust-hue($color, 30);
+}
+
+@function triad($color) {
+  @return adjust-hue($color, -120) $color adjust-hue($color, 120);
+}

@@ -1,96 +1,12 @@
-.graph-wrapper {
-  margin-bottom: $typical-distance;
-
-  border: 1px solid $offwhite-border;
-  border-right: 0;
-  border-left: 0;
-  background-color: lighten($offwhite, 2);
-}
-
-.graph-tile-wrapper {
-  padding: 40px;
-}
-
-.graph-tile {
-  display: inline-block;
-
-  border: 1px solid $offwhite-border;
-  border-radius: $--border-radius;
-  background-color: white;
-}
-
-.graph-tile-header {
-  padding: 20px;
-  padding-bottom: 0;
-  h2 {
-    font-size: 15px;
-    font-weight: 600;
-
-    color: $text-color;
-  }
-}
-
-.graph-tile-body {
-  padding: 25px;
-}
-
-.bar {
-  rect {
-    fill: $accent-color;
-    + rect {
-      fill: $accent-color-darker;
-    }
-  }
-}
-
-.axis {
-  text {
-    font-size: 11px;
-
-    color: $slate;
-  }
-  &.x {
-    text {
-      text-anchor: middle;
-    }
-  }
-  &.y {
-    text {
-      text-anchor: end;
-    }
-  }
-  line {
-    shape-rendering: crispedges;
-    stroke: $grey;
-  }
-}
-
-.legend {
-  display: block;
-  dt {
-    font-size: 12px;
-
-    display: inline;
-
-    margin-right: 8px;
-
-    color: $slate;
-  }
-  dd {
-    display: inline-block;
-
-    width: 10px;
-    height: 10px;
-    margin-right: 16px;
-
-    vertical-align: middle;
-
-    background-color: $accent-color;
-    &:nth-of-type(2) {
-      background-color: $accent-color-darker;
-    }
-    &:last-child {
-      margin-right: 0;
+.svg-graph {
+  @each $label, $color  in $graph-colors {
+    &.#{$label} {
+      rect, circle {
+        fill: $color;
+        &:nth-child(2) {
+          fill: darken($color, 17);
+        }
+      }
     }
   }
 }

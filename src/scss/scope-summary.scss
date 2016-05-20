@@ -1,3 +1,12 @@
+.scopes-wrapper {
+  padding: $typical-distance;
+  h1 {
+    font-size: 24px;
+
+    margin-bottom: $typical-distance;
+  }
+}
+
 .toolbar {
   margin-bottom: 20px;
   input {
@@ -9,26 +18,28 @@
   width: 100%;
 
   border-collapse: collapse;
+
+  background-color: white;
   td {
     padding: 0 20px;
 
-    border-left: 1px solid $grey;
+    border-left: 1px solid $offwhite-border;
   }
   thead {
     font-weight: 600;
 
-    background: hsl(9, 0%, 95%);
+    background: darken($offwhite, 3);
     tr, td {
-      border-color: #d0d0d0;
+      border-color: darken($offwhite-border, 6);
     }
   }
   tr {
     line-height: 50px;
 
-    border: 1px solid $grey;
+    border: 1px solid $offwhite-border;
 
     &:nth-child(even) {
-      background-color: hsl(9, 0%, 98%);
+      background-color: $offwhite;
     }
   }
 }
@@ -75,11 +86,6 @@
   width: 100px;
 
   text-align: center;
-}
-
-.scopes-wrapper {
-  padding: $typical-distance;
-  padding-top: 0;
 }
 
 @media screen and (max-width: 650px) {

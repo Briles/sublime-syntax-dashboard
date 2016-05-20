@@ -31,68 +31,50 @@
   letter-spacing: .023em;
 }
 
-.page-header {
-  padding: 20px $typical-distance;
+.at-a-glance {
+  padding: $typical-distance $typical-distance * 4;
 
-  h1 {
-    font-size: 24px;
-  }
+  border-bottom: 1px solid $offwhite-border;
+  background-color: white;
 }
 
 .stat-blocks {
   display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+  align-content: stretch;
 }
 
 .stat-block {
+  $block-border: $offwhite-border;
+
   position: relative;
 
-  padding-left: 50px;
-
   text-align: center;
-  h2 {
-    font-size: 21px;
 
-    position: relative;
-    &::after {
-      position: absolute;
-      top: 50%;
-
-      display: inline-block;
-
-      margin-top: -2px;
-      margin-left: 5px;
-
-      content: '';
-      transition: all 200ms ease-in-out;
-      vertical-align: middle;
-
-      border-width: 0;
-      border-style: solid;
-    }
-    &.gt::after {
-      border-width: 0 5px 5px;
-      border-color: transparent transparent $accent-color;
-    }
-    &.lt::after {
-      border-width: 5px 5px 0;
-      border-color: $red transparent transparent;
-    }
-    &.eq::after {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-      background-color: $slate;
+  align-self: stretch;
+  flex: 1 1 auto;
+  &:last-child {
+    h2 {
+      border-right: 1px solid $block-border;
     }
   }
   h3 {
-    font-weight: 200;
+    font-size: 16px;
 
-    margin-top: 12px;
+    margin-bottom: 20px;
 
     text-transform: capitalize;
+
+    color: $slate;
   }
-  &:first-child {
-    padding-left: 0;
+  h2 {
+    font-size: 40px;
+    line-height: 1em;
+
+    padding: 20px 0 30px;
+
+    border-left: 1px solid $block-border;
   }
 }

@@ -10,21 +10,15 @@ body {
   text-rendering: optimizeLegibility;
 
   color: $text-color;
+  background-color: $offwhite;
 
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-weight: normal;
 
   margin: 0;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
-
-  border: 0;
 }
 
 button {
@@ -43,17 +37,6 @@ rect {
   shape-rendering: crispedges;
 }
 
-.clearfix {
-  &::before, &::after {
-    display: table;
-
-    content: ' ';
-  }
-  &::after {
-    clear: both;
-  }
-}
-
 input {
   line-height: 40px;
 
@@ -61,7 +44,7 @@ input {
   height: 40px;
   padding: 0 15px;
 
-  border: 1px solid #e0e0e0;
+  border: 1px solid $offwhite-border;
   border-radius: $--border-radius;
   outline: none;
 

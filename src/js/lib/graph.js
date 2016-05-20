@@ -1,10 +1,48 @@
 (function () {
   'use strict';
 
+  var graphColors = ['green', 'red', 'purple', 'orange', 'pink', 'aqua', 'lime', 'yellow'];
+
   function findMax(data, prop) {
     return Math.max.apply(null, data.map(function (x) {
       return x[prop];
     }));
+  }
+
+  function Bar(gHeight, dimHeight, dimX, xProp, value) {
+    if (!(this instanceof Bar)) {
+      return new Bar(arguments);
+    }
+
+    this.height = isNaN(dimHeight) ? 0 : dimHeight;
+    this.x = dimX;
+    this.y = gHeight - this.height;
+    this.xProp = xProp;
+    this.value = value;
+
+    return this;
+  }
+
+  function makeBars(_i) {
+    var bars = [];
+    var yProp = _i.yProp;
+    var data = _i.data;
+    var max = findMax(data, yProp);
+    var height = _i.height;
+
+    angular.forEach(data, function (yObj, idx) {
+      var value = yObj[yProp];
+      var bar = new Bar(
+        height,
+        (value / max * height),
+        (idx * _i.barTotalWidth),
+        yObj[_i.xProp],
+        value
+      );
+      bars.push(bar);
+    });
+
+    return bars;
   }
 
   function BarGraph(conf) {
@@ -12,61 +50,49 @@
       return new BarGraph(arguments);
     }
 
-    this.data = conf.data;
+    for (var prop in conf) {
+      this[prop] = conf[prop];
+    }
 
-    this.graphOffset = 30;
-    this.barOffset = 18;
-    this.totalOffset = this.graphOffset + this.barOffset;
-
-    this.barWidth = 15;
-    this.barMargin = 2;
     this.barTotalWidth = this.barWidth + this.barMargin;
-
-    this.yOffset = 5;
-
-    this.height = 100;
-    this.graphHeight = this.height + 10;
-    this.width = this.data.length * this.barTotalWidth + this.totalOffset - this.barMargin;
-    this.max = findMax(this.data, 'count');
-    this.axis = {};
+    this.width = this.data.length * this.barTotalWidth - this.barMargin;
+    this.bars = makeBars(this);
 
     return this;
   }
 
-  BarGraph.prototype.barHeight = function (val) {
-    return val / this.max * this.height;
+  BarGraph.prototype.setColor = function (index) {
+    this.color = typeof index === 'string' ? index : graphColors[index];
   };
 
-  BarGraph.prototype.barX = function (idx) {
-    return idx * this.barTotalWidth + (this.barOffset / 2);
-  };
+  BarGraph.prototype.build = function () {
+    var _barWidth = this.barWidth;
+    var ns = 'http://www.w3.org/2000/svg';
 
-  BarGraph.prototype.barY = function (val) {
-    return this.height - (val / this.max * this.height) + this.yOffset;
-  };
+    var svg = document.createElementNS(ns, 'svg');
+    svg.classList = 'svg-graph ' + this.color;
+    svg.setAttribute('width', this.width);
+    svg.setAttribute('height', this.height);
+    var barWrapper = document.createElementNS(ns, 'g');
+    svg.appendChild(barWrapper);
 
-  BarGraph.prototype.makeYAxis = function (conf) {
-    var axis = [];
+    angular.forEach(this.bars, function (bar) {
+      var barEl = document.createElementNS(ns, 'g');
+      barEl.classList = 'bar';
+      barEl.setAttribute('transform', 'translate(' + bar.x + ', 0)');
+      var tooltipContents = '<strong>' + bar.xProp + '</strong>: <strong>' + bar.value + '</strong>';
+      barEl.setAttribute('svg-tooltip', tooltipContents);
 
-    var scale = conf.scale - 1;
-    var offset = this.yOffset;
-    var data = this.data;
+      var rect = document.createElementNS(ns, 'rect');
+      rect.setAttribute('width', _barWidth);
+      rect.setAttribute('height', bar.height);
+      rect.setAttribute('y', bar.y);
 
-    offset = !angular.isNumber(offset) ? 0 : offset;
-    var inc = this.max / scale;
-    var yInc = this.height / scale;
-    var r = 0;
+      barEl.appendChild(rect);
+      barWrapper.appendChild(barEl);
+    });
 
-    for (var i = scale; i >= 0; i--) {
-      axis.push({
-        label: Math.round(i * inc),
-        y: yInc * r + offset,
-        lineLength: data.length * this.barTotalWidth + this.barOffset,
-      });
-      r++;
-    }
-
-    this.axis.y = axis;
+    return svg;
   };
 
   module.exports = {
