@@ -5,3 +5,15 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.section {
+  padding: $typical-distance;
+
+  border-bottom: 1px solid $offwhite-border;
+  h1:first-child {
+    margin-bottom: $typical-distance;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+}

@@ -35,10 +35,10 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
             li(ng-repeat="syntax in syntaxes")
               a(ng-href="#/{{syntax | encodeURIComponent}}") {{syntax}}
     .main-content
-      .at-a-glance
+      .section.at-a-glance
         .stat-blocks
           .stat-block(agg-stat ng-repeat="(label, data) in aggregate")
-      .scopes-wrapper
+      .section
         h1 Scopes
         .toolbar
           input(

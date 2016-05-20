@@ -32,10 +32,10 @@
 }
 
 .at-a-glance {
-  padding: $typical-distance $typical-distance * 4;
+  $padding: $typical-distance * 4;
 
-  border-bottom: 1px solid $offwhite-border;
-  background-color: white;
+  padding-right: $padding;
+  padding-left: $padding;
 }
 
 .stat-blocks {
