@@ -40,20 +40,6 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
       .at-a-glance
         .stat-blocks
           .stat-block(agg-stat ng-repeat="(label, data) in aggregate")
-            h3 {{label}}
-            h2 {{data}}
-            //- svg.svg-graph(ng-class="['green','red','purple','orange','pink','aqua','lime','yellow'][$index]" ng-attr-width="{{graph.width}}" ng-attr-height="{{graph.height}}")
-            //-     g
-            //-       g.bar(
-            //-         ng-attr-transform="translate({{graph.barX($index)}}, 0)"
-            //-         ng-repeat="stat in graph.data"
-            //-         svg-tooltip="{{stat.tag}}: {{stat.scopes}}"
-            //-       )
-            //-         rect(
-            //-           ng-attr-width="{{graph.barWidth}}"
-            //-           ng-attr-height="{{graph.barHeight(stat.scopes)}}"
-            //-           ng-attr-y="{{graph.barY(stat.scopes)}}"
-            //-         )
       .scopes-wrapper
         h1 Scopes
         .toolbar
