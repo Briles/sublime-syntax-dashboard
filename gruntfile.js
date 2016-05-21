@@ -12,6 +12,12 @@ const jadeFiles = [{
   src: ['*.jade'],
   dest: '',
   ext: '.html',
+}, {
+  expand: true,
+  cwd: srcPath + 'templates/partials/',
+  src: ['*.jade'],
+  dest: 'ng-includes/',
+  ext: '.html',
 }];
 
 module.exports = function (grunt) {

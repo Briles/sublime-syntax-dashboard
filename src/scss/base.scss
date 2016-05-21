@@ -51,3 +51,12 @@ input {
     border-color: $slate;
   }
 }
+
+a {
+  text-decoration: none;
+
+  color: $text-color;
+  &:hover {
+    color: $primary-color;
+  }
+}

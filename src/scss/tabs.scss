@@ -1,0 +1,30 @@
+.tabs {
+  padding: 0 $typical-distance;
+
+  border-bottom: 1px solid $offwhite-border;
+  background: $offwhite;
+  a {
+    font-size: 14px;
+    font-weight: 600;
+
+    display: inline-block;
+
+    margin-bottom: -1px;
+    padding: ($typical-distance / 2) $typical-distance;
+
+    cursor: pointer;
+
+    color: darken($slate, 13);
+    border: 1px solid transparent;
+    border-top: 0;
+    border-bottom: 0;
+    &:hover {
+      color: $text-color;
+    }
+    &.current {
+      color: $text-color;
+      border-color: $offwhite-border;
+      background-color: white;
+    }
+  }
+}

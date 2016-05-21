@@ -1,0 +1,18 @@
+.typical-table {
+  width: 100%;
+
+  border-collapse: collapse;
+  td {
+    padding: 20px;
+  }
+  thead {
+    font-weight: 600;
+
+    background: darken($offwhite, 3);
+  }
+  tr {
+    &:nth-child(even) {
+      background-color: $offwhite;
+    }
+  }
+}

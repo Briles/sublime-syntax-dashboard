@@ -1,17 +1,11 @@
-.flex {
-  display: flex;
-
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
 .section {
   padding: $typical-distance;
 
-  border-bottom: 1px solid $offwhite-border;
   h1:first-child {
     margin-bottom: $typical-distance;
+  }
+  &.at-a-glance {
+    border-bottom: 1px solid $offwhite-border;
   }
   &:last-child {
     border-bottom: 0;

@@ -1,0 +1,31 @@
+h1 Includes
+.toolbar
+  input(
+    type="search"
+    ng-model="tableFilter"
+    placeholder="filter includes"
+    aria-label="filter includes"
+  )
+table.typical-table
+  thead
+    tr
+      td
+        button.table-sort-button(
+          ng-click="orderBy('value')"
+          ng-class="sortStatus('value')"
+        ) Include
+      td.scope-measure
+        button.table-sort-button(
+          ng-click="orderBy('count')"
+          ng-class="sortStatus('count')"
+        ) Count
+  tbody
+    tr(ng-if="!(reports.includes | filter:tableFilter).length")
+      td {{syntax}} has no includes
+        span(ng-if="tableFilter")= ' that match {{tableFilter}}'
+    tr(
+      ng-repeat="include in reports.includes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
+    )
+      td {{include.value}}
+      td.scope-measure
+        span(ng-if="include.count > 1") {{include.count}}

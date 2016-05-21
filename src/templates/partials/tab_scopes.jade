@@ -1,0 +1,31 @@
+h1 Scopes
+.toolbar
+  input(
+    type="search"
+    ng-model="tableFilter"
+    placeholder="filter scopes"
+    aria-label="filter scopes"
+  )
+table.typical-table
+  thead
+    tr
+      td
+        button.table-sort-button(
+          ng-click="orderBy('value')"
+          ng-class="sortStatus('value')"
+        ) Scope
+      td.scope-measure
+        button.table-sort-button(
+          ng-click="orderBy('count')"
+          ng-class="sortStatus('count')"
+        ) Count
+  tbody
+    tr(ng-if="!(reports.scopes | filter:tableFilter).length")
+      td {{syntax}} has no scopes
+        span(ng-if="tableFilter")= ' that match {{tableFilter}}'
+    tr(
+      ng-repeat="scope in reports.scopes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
+    )
+      td {{scope.value}}
+      td.scope-measure
+        span(ng-if="scope.count > 1") {{scope.count}}

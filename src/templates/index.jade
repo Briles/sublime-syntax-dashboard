@@ -38,39 +38,12 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
       .section.at-a-glance
         .stat-blocks
           .stat-block(agg-stat ng-repeat="(label, data) in aggregate")
-      .section
-        h1 Scopes
-        .toolbar
-          input(
-            type="search"
-            ng-model="scopeFilter"
-            placeholder="filter scopes"
-            aria-label="filter scopes"
-          )
-        table.scope-summary
-          thead
-            tr
-              td
-                button.table-sort-button(
-                  ng-click="orderBy('scope')"
-                  ng-class="sortStatus('scope')"
-                ) Scope
-              td.scope-measure
-                button.table-sort-button(
-                  ng-click="orderBy('specificity')"
-                  ng-class="sortStatus('specificity')"
-                ) Specificity
-              td.scope-measure
-                button.table-sort-button(
-                  ng-click="orderBy('count')"
-                  ng-class="sortStatus('count')"
-                ) Count
-          tr.scope-summary-item(
-            ng-repeat="scope in report | orderBy:scopeOrderBy:scopeOrderRev | filter:scopeFilter track by $index"
-          )
-            td {{scope.scope}}
-            td.scope-measure
-              span(ng-if="scope.specificity > 1") {{scope.specificity}}
-            td.scope-measure
-              span(ng-if="scope.count > 1") {{scope.count}}
+      .tabs-wrapper
+        nav.tabs
+          a(
+            ng-class="{current:$index===activeTabIndex}"
+            ng-repeat="tab in tabs track by $index"
+            ng-click="setTab($index)"
+          ) {{tab.label}}
+        .section(ng-include="'ng-includes/'+tabTemplate")
     .svg-tooltip

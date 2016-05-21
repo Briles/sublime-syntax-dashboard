@@ -5,36 +5,6 @@
   }
 }
 
-.scope-summary {
-  width: 100%;
-
-  border-collapse: collapse;
-
-  background-color: white;
-  td {
-    padding: 0 20px;
-
-    border-left: 1px solid $offwhite-border;
-  }
-  thead {
-    font-weight: 600;
-
-    background: darken($offwhite, 3);
-    tr, td {
-      border-color: darken($offwhite-border, 6);
-    }
-  }
-  tr {
-    line-height: 50px;
-
-    border: 1px solid $offwhite-border;
-
-    &:nth-child(even) {
-      background-color: $offwhite;
-    }
-  }
-}
-
 .table-sort-button {
   position: relative;
 
@@ -71,10 +41,14 @@
   &.asc::before, &.desc::after {
     opacity: 1;
   }
+
+  &:hover {
+    color: $primary-color;
+  }
 }
 
 .scope-measure {
-  width: 100px;
+  width: 140px;
 
   text-align: center;
 }

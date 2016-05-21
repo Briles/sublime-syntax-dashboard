@@ -1,0 +1,1 @@
+<h1>Dependencies</h1><ul class="typical-list"><li ng-repeat="dependency in syntaxData.dependencies"><a ng-href="#/{{dependency | encodeURIComponent}}">{{dependency}}</a></li><li ng-if="!syntaxData.dependencies.length" ng-class="{'no-link': !syntaxData.dependencies.length}">{{syntax}} has no dependencies</li></ul>

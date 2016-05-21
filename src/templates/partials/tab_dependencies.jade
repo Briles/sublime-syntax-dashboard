@@ -1,0 +1,8 @@
+h1 Dependencies
+ul.typical-list
+  li(ng-repeat="dependency in syntaxData.dependencies")
+    a(ng-href="#/{{dependency | encodeURIComponent}}") {{dependency}}
+  li(
+    ng-if="!syntaxData.dependencies.length"
+    ng-class="{'no-link': !syntaxData.dependencies.length}"
+  ) {{syntax}} has no dependencies

@@ -1,0 +1,14 @@
+.typical-list {
+  $padding: $typical-distance / 2;
+
+  display: block;
+
+  li {
+    display: block;
+
+    padding: $padding;
+    &:nth-child(odd) {
+      background-color: $offwhite;
+    }
+  }
+}

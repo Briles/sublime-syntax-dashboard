@@ -7,9 +7,21 @@ module.exports = function ($scope, $http, $location) {
   $scope.syntaxes = require('../lib/syntaxes.js');
   var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
 
-  $scope.scopeFilter = '';
-  $scope.scopeOrderBy = 'scope';
-  $scope.scopeOrderRev = false;
+  $scope.tableFilter = '';
+  $scope.tableOrderBy = 'value';
+  $scope.tableOrderRev = false;
+
+  $scope.tabs = [{
+    label: 'Scopes',
+    template: 'tab_scopes',
+  }, {
+    label: 'Includes',
+    template: 'tab_includes',
+  }, {
+    label: 'Dependencies',
+    template: 'tab_dependencies',
+  }, ];
+  $scope.activeTabIndex = 0;
 
   function setSyntaxData(name) {
     $scope.navIsActive = false;
@@ -21,7 +33,10 @@ module.exports = function ($scope, $http, $location) {
     delete aggregate.tag;
     $scope.aggregate = aggregate;
 
-    $scope.report = generateReport($scope.syntaxData.scopes);
+    $scope.reports = {
+      scopes: generateReport($scope.syntaxData.scopes),
+      includes: generateReport($scope.syntaxData.includes),
+    };
   }
 
   function fetchSyntaxData(name) {
@@ -44,7 +59,7 @@ module.exports = function ($scope, $http, $location) {
 
   $scope.$on('$locationChangeSuccess',
     function (e, url) {
-      fetchSyntaxData(decodeURIComponent(url.split('/').last()));
+      fetchSyntaxData(decodeURIComponent(url.split('/')[5]));
     });
 
   function indexOfObject(arr, key, val) {
@@ -62,13 +77,12 @@ module.exports = function ($scope, $http, $location) {
   function generateReport(data) {
     var report = [];
 
-    angular.forEach(data, function (scope) {
-      var objIdx = indexOfObject(report, 'scope', scope);
+    angular.forEach(data, function (value) {
+      var objIdx = indexOfObject(report, 'value', value);
       if (objIdx === -1) {
         report.push({
-          scope: scope,
+          value: value,
           count: 1,
-          specificity: scope.split('.').length,
         });
       } else {
         report[objIdx].count += 1;
@@ -79,26 +93,33 @@ module.exports = function ($scope, $http, $location) {
   }
 
   $scope.sortStatus = function (key) {
-    var isCurrentKey = $scope.scopeOrderBy === key;
+    var isCurrentKey = $scope.tableOrderBy === key;
     return {
-      asc: isCurrentKey && !$scope.scopeOrderRev,
-      desc: isCurrentKey && $scope.scopeOrderRev,
+      asc: isCurrentKey && !$scope.tableOrderRev,
+      desc: isCurrentKey && $scope.tableOrderRev,
     };
   };
 
   $scope.orderBy = function (key) {
-    if ($scope.scopeOrderBy === key) {
-      $scope.scopeOrderRev = $scope.scopeOrderRev === true ? false : true;
+    if ($scope.tableOrderBy === key) {
+      $scope.tableOrderRev = $scope.tableOrderRev === true ? false : true;
     } else {
-      $scope.scopeOrderRev = false;
+      $scope.tableOrderRev = false;
     }
 
-    $scope.scopeOrderBy = key;
+    $scope.tableOrderBy = key;
   };
 
   $scope.toggleNav = function () {
     $scope.navIsActive = $scope.navIsActive === true ? false : true;
   };
+
+  $scope.setTab = function (idx) {
+    $scope.activeTabIndex = idx;
+    $scope.tabTemplate = $scope.tabs[idx].template;
+  };
+
+  $scope.setTab($scope.activeTabIndex);
 
   Array.prototype.last = function () {
     return this.slice(-1)[0];
