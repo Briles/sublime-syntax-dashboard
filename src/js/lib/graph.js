@@ -78,7 +78,6 @@
 
     angular.forEach(this.bars, function (bar) {
       var barEl = document.createElementNS(ns, 'g');
-      barEl.classList = 'bar';
       barEl.setAttribute('transform', 'translate(' + bar.x + ', 0)');
       var tooltipContents = '<strong>' + bar.xProp + '</strong>: <strong>' + bar.value + '</strong>';
       barEl.setAttribute('svg-tooltip', tooltipContents);
