@@ -28,3 +28,145 @@
     border-top-color: $tooltip-background;
   }
 }
+
+// Simple tooltips - Inspired by Tipsy (https://github.com/jaz303/tipsy)
+//
+// Usage:   .toolipped .toolipped-[n/s/e/w/ne/nw/se/sw]
+// North and East position the tooltip above and to the right of the element, respectively.
+// The tooltip overrides position, therefore must be wrapped in their own element when used with positioned elements.
+// The tooltip content is the element's 'aria-label' attribute content
+//
+
+.tip {
+  position: relative;
+  &::before, &::after {
+    position: absolute;
+    z-index: 10000001;
+
+    display: none;
+
+    pointer-events: none;
+  }
+  &::before {
+    width: 0;
+    height: 0;
+
+    content: '';
+
+    color: $tooltip-background;
+    border: 5px solid transparent;
+  }
+  &::after {
+    font: normal 500 12px / 24px $--font-stack-sans;
+
+    padding: 3px 10px;
+
+    content: attr(aria-label);
+    text-align: center;
+    white-space: pre;
+    text-decoration: none;
+    letter-spacing: .02em;
+    text-transform: initial;
+
+    color: $tooltip-foreground;
+    border-radius: $--border-radius;
+    background: $tooltip-background;
+
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+  &:hover {
+    &::before, &::after {
+      display: inline-block;
+
+      text-decoration: none;
+    }
+  }
+}
+
+.tip-n::before, .tip-ne::before, .tip-nw::before {
+  top: -5px;
+  right: 50%;
+  bottom: auto;
+
+  margin-right: -5px;
+
+  border-top-color: $tooltip-background;
+}
+
+.tip-n::after, .tip-ne::after, .tip-nw::after {
+  right: 50%;
+  bottom: 100%;
+
+  margin-bottom: 5px;
+}
+
+.tip-s::before, .tip-se::before, .tip-sw::before {
+  top: auto;
+  right: 50%;
+  bottom: -5px;
+
+  margin-right: -5px;
+
+  border-bottom-color: $tooltip-background;
+}
+
+.tip-s::after, .tip-se::after, .tip-sw::after {
+  top: 100%;
+  right: 50%;
+
+  margin-top: 5px;
+}
+
+.tip-s::after, .tip-n::after {
+  transform: translateX(50%);
+}
+
+.tip-e::before, .tip-w::before {
+  top: 50%;
+  bottom: 50%;
+
+  margin-top: -5px;
+}
+
+.tip-w {
+  &::before {
+    left: -5px;
+
+    border-left-color: $tooltip-background;
+  }
+  &::after {
+    right: 100%;
+
+    margin-right: 5px;
+  }
+}
+
+.tip-e {
+  &::before {
+    right: -5px;
+
+    border-right-color: $tooltip-background;
+  }
+  &::after {
+    left: 100%;
+
+    margin-left: 5px;
+  }
+}
+
+.tip-e::after, .tip-w::after {
+  bottom: 50%;
+
+  transform: translateY(50%);
+}
+
+.tip-nw::after, .tip-sw::after {
+  margin-right: -15px;
+}
+
+.tip-ne::after, .tip-se::after {
+  right: auto;
+  left: 50%;
+
+  margin-left: -15px;
+}

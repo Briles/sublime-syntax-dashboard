@@ -18,6 +18,7 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
       rel='stylesheet'
       type='text/css'
     )
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     if (release === false)
       script(src="//localhost:35729/livereload.js" async)
       script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js")
@@ -34,6 +35,12 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
           ul.dropdown-menu(role="navigation")
             li(ng-repeat="syntax in syntaxes")
               a(ng-href="#/{{syntax | encodeURIComponent}}") {{syntax}}
+      .fab-wrapper
+        button.floating-action-button.tip.tip-w(
+          aria-label="Clear syntax cache & reload"
+          ng-click="clearCache()"
+        )
+          i.material-icons cached
     .main-content
       .section.at-a-glance
         .stat-blocks

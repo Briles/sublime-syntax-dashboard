@@ -92,6 +92,12 @@ module.exports = function ($scope, $http, $location) {
     return report;
   }
 
+  $scope.clearCache = function () {
+    syntaxCache = {};
+    localStorage.clear();
+    fetchSyntaxData($location.path().slice(1));
+  };
+
   $scope.sortStatus = function (key) {
     var isCurrentKey = $scope.tableOrderBy === key;
     return {
