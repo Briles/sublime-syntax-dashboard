@@ -36,19 +36,83 @@ rect {
   shape-rendering: crispedges;
 }
 
+// Chrome/Safari/Opera
+&::-webkit-input-placeholder {
+  opacity: 1;
+}
+
+// Firefox <= 18
+&:-moz-placeholder {
+  opacity: 1;
+}
+
+// Firefox > 18
+&::-moz-placeholder {
+  opacity: 1;
+}
+
+// Edge (also supports Webkit)
+&::-ms-input-placeholder {
+  opacity: 1;
+}
+
+// IE 10/11
+&:-ms-input-placeholder {
+  opacity: 1;
+}
+
 input {
-  line-height: 40px;
+  $height: 48px;
+  $color-default: hsl(230, 3, 76);
+  $color-hover: $slate;
+  $color-focus: $slate;
+  @include actionable;
+  @include input-placeholder($color-default) {
+    transition: all 175ms ease-in-out;
+  };
 
-  max-width: 320px;
-  height: 40px;
-  padding: 0 15px;
+  line-height: $height;
 
-  border: 1px solid $offwhite-border;
-  border-radius: $--border-radius;
+  height: $height;
+  padding: 0 20px;
+
+  transition: all 175ms ease-in-out;
+
+  color: $color-default;
+  border: 2px solid hsl(0, 0, 90);
+  border-radius: $height / 2;
   outline: none;
 
+  &.with-icon-to-left {
+    padding-left: $height;
+  }
+
+  + .icon-to-left {
+    padding: ($height - 24px) / 2;
+
+    transition: all 175ms ease-in-out;
+
+    color: $color-default;
+  }
+
+  &:hover {
+    @include input-placeholder($color-hover);
+
+    color: $color-hover;
+    border-color: $color-hover;
+    + .icon-to-left {
+      color: $color-hover;
+    }
+  }
+
   &:focus {
-    border-color: $slate;
+    @include input-placeholder($color-focus);
+
+    color: $color-focus;
+    border-color: $color-focus;
+    + .icon-to-left {
+      color: $color-focus;
+    }
   }
 }
 
@@ -59,4 +123,16 @@ a {
   &:hover {
     color: $primary-color;
   }
+}
+
+.relative-wrapper {
+  position: relative;
+}
+
+.icon-to-left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  transform: translateY(-50%);
 }

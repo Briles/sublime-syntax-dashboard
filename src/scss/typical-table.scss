@@ -3,16 +3,20 @@
 
   border-collapse: collapse;
   td {
-    padding: 20px;
+    padding: 20px 40px;
   }
   thead {
     font-weight: 600;
 
-    background: darken($offwhite, 3);
+    border-top: 1px solid hsl(0, 0%, 90%);
+    background: white;
+  }
+  tbody {
+    background: #f2f3f5;
   }
   tr {
     &:nth-child(even) {
-      background-color: $offwhite;
+      background-color: #fafafa;
     }
   }
 }

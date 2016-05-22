@@ -23,147 +23,93 @@
   padding: 10px $typical-distance;
 
   color: white;
-  background-color: $primary-color;
+  background-color: $charcoal-1;
 }
 
 .header-current-page {
   font-size: 24px;
+  font-weight: 300;
   line-height: 60px;
 
   letter-spacing: .023em;
-}
+  .material-icons {
+    margin-left: 5px;
 
-.fab-wrapper {
-  position: absolute;
-  top: 100%;
-  right: $typical-distance * 2;
-}
-
-.floating-action-button {
-  line-height: 60px;
-
-  display: block;
-
-  width: 60px;
-  height: 60px;
-
-  transition: all 200ms ease-in-out;
-  transform: translateY(-50%);
-  text-align: center;
-
-  color: white;
-  border-radius: 50%;
-  background-color: $accent-color;
-  box-shadow: 0 1px 3px fade-out(black, .6);
-  i {
-    font-size: 30px;
-
+    transition: opacity 200ms ease-in-out;
     vertical-align: middle;
+
+    opacity: .63;
+    color: white;
   }
   &:hover {
-    box-shadow: 0 2px 6px fade-out(black, .7);
+    .material-icons {
+      opacity: 1;
+    }
   }
 }
 
 .at-a-glance {
-  $padding: $typical-distance * 4;
-
-  padding-right: $padding;
-  padding-left: $padding;
+  background-color: $charcoal-2;
 }
 
 .stat-blocks {
   display: flex;
 
+  padding: $typical-distance / 2;
+
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   align-content: stretch;
 }
 
-.stat-block {
-  $block-border: $offwhite-border;
-
+.stat-block-wrapper {
   position: relative;
 
-  text-align: center;
+  width: 100 / 4 * 1%;
+  padding: $typical-distance / 2;
 
   align-self: stretch;
   flex: 1 1 auto;
-  &:last-child {
-    h2 {
-      border-right: 1px solid $block-border;
-    }
-  }
+}
+
+.stat-block {
+  overflow: hidden;
+
+  padding: $typical-distance / 2;
+  padding-bottom: 0;
+
+  text-align: center;
+
+  background-color: $charcoal-3;
   h3 {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
 
-    margin-bottom: 20px;
-
-    text-transform: capitalize;
+    letter-spacing: .037em;
+    text-transform: uppercase;
 
     color: $slate;
   }
   h2 {
-    font-size: 40px;
+    font-size: 32px;
+    font-weight: 300;
     line-height: 1em;
 
-    padding: 20px 0 30px;
+    padding: ($typical-distance / 2) 0 30px;
 
-    border-left: 1px solid $block-border;
+    color: white;
   }
 }
 
-@media screen and (max-width: 1400px) {
-  .at-a-glance {
-    padding-right: $typical-distance;
-    padding-left: $typical-distance;
+@media screen and (max-width: 1000px) {
+  .stat-block-wrapper {
+    width: 50%;
   }
 }
 
-@media screen and (max-width: 1200px) {
-  .stat-blocks {
-    flex-wrap: wrap;
-  }
-
-  .stat-block {
-    min-width: 25%;
-    padding-bottom: $typical-distance * 1.5;
-    h2 {
-      border: 0;
-    }
-    &:last-child {
-      padding-bottom: 0;
-      h2 {
-        border: inherit;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .stat-block {
-    h3 {
-      font-size: 13px;
-    }
-    h2 {
-      font-size: 24px;
-    }
-  }
-}
-
-@media screen and (max-width: 405px) {
-  .stat-block {
-    padding-top: $typical-distance / 2;
-    padding-bottom: $typical-distance / 2;
-
-    border-top: 1px solid $offwhite-border;
-    &:last-child {
-      h2 {
-        border: 0;
-      }
-    }
-    &:first-child {
-      border-top: 0;
-    }
+@media screen and (max-width: 600px) {
+  .stat-block-wrapper {
+    width: 100%;
   }
 }

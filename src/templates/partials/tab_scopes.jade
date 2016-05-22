@@ -1,11 +1,3 @@
-h1 Scopes
-.toolbar
-  input(
-    type="search"
-    ng-model="tableFilter"
-    placeholder="filter scopes"
-    aria-label="filter scopes"
-  )
 table.typical-table
   thead
     tr
@@ -14,7 +6,7 @@ table.typical-table
           ng-click="orderBy('value')"
           ng-class="sortStatus('value')"
         ) Scope
-      td.scope-measure
+      td.table-measure
         button.table-sort-button(
           ng-click="orderBy('count')"
           ng-class="sortStatus('count')"
@@ -27,5 +19,5 @@ table.typical-table
       ng-repeat="scope in reports.scopes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
     )
       td {{scope.value}}
-      td.scope-measure
+      td.table-measure
         span(ng-if="scope.count > 1") {{scope.count}}

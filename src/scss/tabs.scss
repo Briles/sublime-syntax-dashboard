@@ -1,30 +1,48 @@
 .tabs {
-  padding: 0 $typical-distance;
+  display: flex;
 
-  border-bottom: 1px solid $offwhite-border;
-  background: $offwhite;
+  padding: $typical-distance;
+
+  justify-content: space-between;
+  align-items: center;
   a {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: 300;
 
     display: inline-block;
 
-    margin-bottom: -1px;
-    padding: ($typical-distance / 2) $typical-distance;
+    margin-right: $typical-distance;
 
     cursor: pointer;
+    transition: color 175ms ease-in-out;
 
-    color: darken($slate, 13);
-    border: 1px solid transparent;
-    border-top: 0;
-    border-bottom: 0;
+    color: $slate;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:hover {
       color: $text-color;
     }
     &.current {
-      color: $text-color;
-      border-color: $offwhite-border;
-      background-color: white;
+      color: $primary-color;
     }
+  }
+}
+
+@media screen and (max-width: 765px) {
+  .tabs a {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 715px) {
+  .tabs a {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  .tabs a {
+    margin-bottom: 24px;
   }
 }

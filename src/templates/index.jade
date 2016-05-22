@@ -14,9 +14,8 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
     link(rel='icon' type='image/x-icon' href='favicon.ico')
     link(href='main.min.css' rel='stylesheet' type='text/css' media='all')
     link(
-      href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+      href='https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500,400italic,500italic,300italic,300,100italic,100'
       rel='stylesheet'
-      type='text/css'
     )
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     if (release === false)
@@ -25,32 +24,37 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
     else
       script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js")
     script(src="main.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js")
   body
     .catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
     .header-wrapper
       .dropdown-container
         button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
+          i.material-icons expand_more
         .dropdown-wrapper(ng-class="{active: navIsActive}")
           ul.dropdown-menu(role="navigation")
             li(ng-repeat="syntax in syntaxes")
               a(ng-href="#/{{syntax | encodeURIComponent}}") {{syntax}}
-      .fab-wrapper
-        button.floating-action-button.tip.tip-w(
-          aria-label="Clear syntax cache & reload"
-          ng-click="clearCache()"
-        )
-          i.material-icons cached
     .main-content
-      .section.at-a-glance
+      .at-a-glance
         .stat-blocks
-          .stat-block(agg-stat ng-repeat="(label, data) in aggregate")
+          .stat-block-wrapper(ng-repeat="(label, data) in aggregate")
+            .stat-block(agg-stat)
       .tabs-wrapper
         nav.tabs
-          a(
-            ng-class="{current:$index===activeTabIndex}"
-            ng-repeat="tab in tabs track by $index"
-            ng-click="setTab($index)"
-          ) {{tab.label}}
-        .section(ng-include="'ng-includes/'+tabTemplate")
+          div
+            a(
+              ng-class="{current:$index===activeTabIndex}"
+              ng-repeat="tab in tabs track by $index"
+              ng-click="setTab($index)"
+            ) {{tab.label}}
+          .tabs-companion
+            .relative-wrapper
+              input#table-filter.with-icon-to-left(
+                type="search"
+                ng-model="tableFilter"
+                placeholder="search..."
+                aria-label="search..."
+              )
+              label.material-icons.icon-to-left(for="table-filter") search
+        div(ng-include="'ng-includes/'+tabTemplate")
     .svg-tooltip

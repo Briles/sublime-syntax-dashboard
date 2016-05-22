@@ -9,3 +9,62 @@
 
   opacity: 1;
 }
+
+@mixin actionable {
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+@mixin input-placeholder($color) {
+  // Chrome/Safari/Opera
+  &::-webkit-input-placeholder {
+    color: $color;
+    @content;
+  }
+
+  // Firefox <= 18
+  &:-moz-placeholder {
+    color: $color;
+    @content;
+  }
+
+  // Firefox > 18
+  &::-moz-placeholder {
+    color: $color;
+    @content;
+  }
+
+  // Edge (also supports Webkit)
+  &::-ms-input-placeholder {
+    color: $color;
+    @content;
+  }
+
+  // IE 10/11
+  &:-ms-input-placeholder {
+    color: $color;
+    @content;
+  }
+}
+
+@mixin material-icons {
+  font-family: 'Material Icons';
+  font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+
+  display: inline-block;
+
+  white-space: nowrap;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,8 +1,4 @@
-var app = angular.module('syntaxDash', ['angular-loading-bar'])
-  .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
-    cfpLoadingBarProvider.includeSpinner = false;
-    cfpLoadingBarProvider.latencyThreshold = 0;
-  }, ]);
+var app = angular.module('syntaxDash', []);
 
 app.filter('encodeURIComponent', require('../filters/url-encode.js'));
 

@@ -2,10 +2,13 @@
 $offwhite: hsl(219, 30%, 98%);
 $offwhite-border: hsl(220, 12%, 91%);
 $text-color: hsl(200, 15%, 20%);
-$primary-color: hsl(219, 77%, 66%);
+$primary-color: hsl(203, 86%, 61%);
 $accent-color: nth(tetrad($primary-color), 1);
 $red: nth(split-complement($primary-color), 3);
-$slate: hsl(219, 7%, 65%);
+$slate: hsl(220, 7%, 65%);
+$charcoal-1: hsl(224, 16%, 14%);
+$charcoal-2: hsl(222, 17%, 17%);
+$charcoal-3: hsl(220, 18%, 21%);
 $tooltip-foreground: $offwhite;
 $tooltip-background: $text-color;
 $graph-colors: (
@@ -20,6 +23,6 @@ $graph-colors: (
 );
 
 //
-$--font-stack-sans: 'Open Sans', sans-serif;
+$--font-stack-sans: 'Roboto', sans-serif;
 $--border-radius: 6px;
 $typical-distance: 40px;

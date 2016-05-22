@@ -25,31 +25,7 @@
 .dropdown-initer {
   position: relative;
 
-  padding-right: 25px;
-
   color: inherit;
-  &::after {
-    position: absolute;
-    top: 50%;
-    right: 0;
-
-    width: 0;
-    height: 0;
-    margin-top: -2px;
-
-    content: '';
-    transition: opacity 200ms ease-in-out;
-
-    opacity: .63;
-    border-width: 8px 6px 0;
-    border-style: solid;
-    border-color: white transparent transparent;
-  }
-  &:hover {
-    &::after {
-      opacity: 1;
-    }
-  }
 }
 
 .dropdown-wrapper {

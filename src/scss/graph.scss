@@ -1,7 +1,40 @@
+.svg-tooltip {
+  font-size: 12px;
+
+  position: absolute;
+
+  display: none;
+
+  padding: 3px 10px;
+
+  white-space: nowrap;
+
+  color: $text-color;
+  border-radius: $--border-radius;
+  background-color: white;
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+
+    width: 0;
+    height: 0;
+
+    content: '';
+    transform: translateX(-50%);
+
+    border: 5px solid transparent;
+    border-top-color: white;
+  }
+}
+
 .svg-graph {
+  display: block;
+
+  margin: 0 auto;
   @each $label, $color  in $graph-colors {
     &.#{$label} {
-      rect, circle {
+      rect {
         fill: $color;
         &:nth-child(2) {
           fill: darken($color, 17);

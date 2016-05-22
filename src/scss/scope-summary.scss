@@ -1,44 +1,24 @@
-.toolbar {
-  margin-bottom: 20px;
-  input {
-    width: 410px;
-  }
-}
-
 .table-sort-button {
   position: relative;
 
-  padding-right: 18px;
+  text-transform: uppercase;
+  &::after {
+    @include material-icons;
 
-  &::before, &::after {
     position: absolute;
     top: 50%;
-    right: 0;
+    left: 100%;
 
-    margin-top: -2px;
+    margin-top: -1px;
 
-    content: '';
-    transition: all 200ms ease-in-out;
-
-    opacity: .27;
-    border-style: solid;
+    content: 'expand_more';
+    transition: transform 300ms ease-in-out;
+    transform: translateY(-50%) rotateX(180deg);
   }
 
-  &::before {
-    transform: translateY(-85%);
+  &.desc::after {
+    transform: translateY(-50%);
 
-    border-width: 0 5px 5px;
-    border-color: transparent transparent $text-color;
-  }
-
-  &::after {
-    transform: translateY(85%);
-
-    border-width: 5px 5px 0;
-    border-color: $text-color transparent transparent;
-  }
-
-  &.asc::before, &.desc::after {
     opacity: 1;
   }
 
@@ -47,7 +27,7 @@
   }
 }
 
-.scope-measure {
+.table-measure {
   width: 140px;
 
   text-align: center;
