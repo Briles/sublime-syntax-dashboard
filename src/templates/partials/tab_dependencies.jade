@@ -7,7 +7,7 @@ table.typical-table
           ng-class="sortStatus('value')"
         ) Dependency
   tbody
-    tr(ng-if="!syntaxData.dependencies.length")
+    tr(ng-if="!(syntaxData.dependencies | filter:tableFilter).length")
       td {{syntax}} has no dependencies
         span(ng-if="tableFilter")= ' that match {{tableFilter}}'
     tr(

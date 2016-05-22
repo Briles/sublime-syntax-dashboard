@@ -15,6 +15,7 @@ table.typical-table
     tr(ng-if="!(reports.includes | filter:tableFilter).length")
       td {{syntax}} has no includes
         span(ng-if="tableFilter")= ' that match {{tableFilter}}'
+      td
     tr(
       ng-repeat="include in reports.includes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
     )

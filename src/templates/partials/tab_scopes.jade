@@ -15,6 +15,7 @@ table.typical-table
     tr(ng-if="!(reports.scopes | filter:tableFilter).length")
       td {{syntax}} has no scopes
         span(ng-if="tableFilter")= ' that match {{tableFilter}}'
+      td
     tr(
       ng-repeat="scope in reports.scopes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
     )
