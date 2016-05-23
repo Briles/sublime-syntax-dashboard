@@ -9,16 +9,18 @@
     }));
   }
 
-  function Bar(gHeight, dimHeight, dimX, xProp, value) {
+  function Bar(properties) {
     if (!(this instanceof Bar)) {
-      return new Bar(arguments);
+      return new Bar(properties);
     }
 
+    var dimHeight = properties.dimHeight;
+
     this.height = isNaN(dimHeight) ? 0 : dimHeight;
-    this.x = dimX;
-    this.y = gHeight - this.height;
-    this.xProp = xProp;
-    this.value = value;
+    this.x = properties.dimX;
+    this.y = properties.gHeight - this.height;
+    this.xProp = properties.xProp;
+    this.value = properties.value;
 
     return this;
   }
@@ -32,13 +34,13 @@
 
     angular.forEach(data, function (yObj, idx) {
       var value = yObj[yProp];
-      var bar = new Bar(
-        height,
-        (value / max * height),
-        (idx * _i.barTotalWidth),
-        yObj[_i.xProp],
-        value
-      );
+      var bar = new Bar({
+        gHeight: height,
+        dimHeight: (value / max * height),
+        dimX: (idx * _i.barTotalWidth),
+        xProp: yObj[_i.xProp],
+        value: value,
+      });
       bars.push(bar);
     });
 
@@ -47,7 +49,7 @@
 
   function BarGraph(conf) {
     if (!(this instanceof BarGraph)) {
-      return new BarGraph(arguments);
+      return new BarGraph(conf);
     }
 
     for (var prop in conf) {
