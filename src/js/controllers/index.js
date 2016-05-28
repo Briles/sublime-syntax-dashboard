@@ -1,7 +1,9 @@
-var app = angular.module('syntaxDash', []);
+var app = angular.module('syntaxDash', ['ngRoute']);
 
-app.filter('encodeURIComponent', require('../filters/url-encode.js'));
-
-app.controller('syntaxDashCtrl', require('./dashboard.js'))
+app
+  .config(require('../routes.js'))
+  .factory('Page', require('../services/page.js'))
+  .controller('syntaxDashCtrl', require('./dashboard.js'))
   .directive('svgTooltip', require('../directives/tooltip.js'))
-  .directive('aggStat', require('../directives/agg-stat.js'));
+  .directive('aggStat', require('../directives/agg-stat.js'))
+  .filter('encodeURIComponent', require('../filters/url-encode.js'));

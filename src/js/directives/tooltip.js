@@ -2,7 +2,6 @@ module.exports = function () {
   'use strict';
 
   var tooltip = {
-    el: document.querySelectorAll('.svg-tooltip')[0],
     hide: function () {
       var tooltipStyle = this.el.style;
       tooltipStyle.opacity = 0;
@@ -19,6 +18,8 @@ module.exports = function () {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
+      tooltip.el = document.querySelectorAll('.svg-tooltip')[0];
+
       var rawEl = element[0];
       var tooltipContent = attrs.svgTooltip;
       var tooltipEl = tooltip.el;

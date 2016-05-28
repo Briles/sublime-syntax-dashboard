@@ -1,11 +1,11 @@
 doctype html
-html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
+html(ng-app="syntaxDash")
   head
     base(href="/sublime-syntax-dashboard/")
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge')
     meta(http-equiv='content-type' content='text/html; charset=UTF-8')
-    title {{syntax}} &middot; Sublime Syntax Dashboard
+    title(ng-bind='title')
     meta(
       name='description'
       content="Sublime Syntax Dashboard provides insight into the constructs of Sublime Text's default syntaxes"
@@ -20,41 +20,10 @@ html(ng-app="syntaxDash", ng-controller="syntaxDashCtrl")
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     if (release === false)
       script(src="//localhost:35729/livereload.js" async)
-      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js")
+      script(src=`${angularCDN}1.5.5/angular.js`)
+      script(src=`${angularCDN}1.5.5/angular-route.js`)
     else
-      script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js")
+      script(src=`${angularCDN}1.5.5/angular.min.js`)
+      script(src=`${angularCDN}1.5.5/angular-route.min.js`)
     script(src="main.min.js")
-  body
-    .catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
-    .header-wrapper
-      .dropdown-container
-        button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
-          i.material-icons expand_more
-        .dropdown-wrapper(ng-class="{active: navIsActive}")
-          ul.dropdown-menu(role="navigation")
-            li(ng-repeat="syntax in syntaxes")
-              a(ng-href="#/{{syntax | encodeURIComponent}}") {{syntax}}
-    .main-content
-      .at-a-glance
-        .stat-blocks
-          .stat-block-wrapper(ng-repeat="(label, data) in aggregate")
-            .stat-block(agg-stat)
-      .tabs-wrapper
-        nav.tabs
-          div
-            a(
-              ng-class="{current:$index===activeTabIndex}"
-              ng-repeat="tab in tabs track by $index"
-              ng-click="setTab($index)"
-            ) {{tab.label}}
-          .tabs-companion
-            .relative-wrapper
-              input#table-filter.with-icon-to-left(
-                type="search"
-                ng-model="tableFilter"
-                placeholder="search..."
-                aria-label="search..."
-              )
-              label.material-icons.icon-to-left(for="table-filter") search
-        div(ng-include="'ng-includes/'+tabTemplate")
-    .svg-tooltip
+  body(ng-view)

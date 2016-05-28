@@ -1,5 +1,9 @@
-module.exports = function ($scope, $http, $location) {
+module.exports = function ($scope, $http, $location, $route, Page) {
   'use strict';
+
+  Array.prototype.last = function () {
+    return this.slice(-1)[0];
+  };
 
   var lsCacheKey = 'ssdash_syntax_cache';
   var angular = window.angular;
@@ -26,9 +30,9 @@ module.exports = function ($scope, $http, $location) {
   function setSyntaxData(name) {
     $scope.navIsActive = false;
     $scope.syntaxData = syntaxCache[name];
-    $scope.syntax = $scope.syntaxData.name;
-    $location.path($scope.syntax);
-
+    var syntaxName = $scope.syntaxData.name;
+    $scope.syntax = syntaxName;
+    Page.setTitle(syntaxName + ' Syntax');
     var aggregate = angular.copy($scope.syntaxData.history.last());
     delete aggregate.tag;
     $scope.aggregate = aggregate;
@@ -57,10 +61,7 @@ module.exports = function ($scope, $http, $location) {
     }
   }
 
-  $scope.$on('$locationChangeSuccess',
-    function (e, url) {
-      fetchSyntaxData(decodeURIComponent(url.split('/')[5]));
-    });
+  fetchSyntaxData($route.current.params.syntaxName);
 
   function indexOfObject(arr, key, val) {
     var idx = -1;
@@ -92,12 +93,6 @@ module.exports = function ($scope, $http, $location) {
     return report;
   }
 
-  $scope.clearCache = function () {
-    syntaxCache = {};
-    localStorage.clear();
-    fetchSyntaxData($location.path().slice(1));
-  };
-
   $scope.sortStatus = function (key) {
     var isCurrentKey = $scope.tableOrderBy === key;
     return {
@@ -126,8 +121,4 @@ module.exports = function ($scope, $http, $location) {
   };
 
   $scope.setTab($scope.activeTabIndex);
-
-  Array.prototype.last = function () {
-    return this.slice(-1)[0];
-  };
 };

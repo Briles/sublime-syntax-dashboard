@@ -1,0 +1,33 @@
+.catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
+.header-wrapper
+  .dropdown-container
+    button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{syntax}}
+      i.material-icons expand_more
+    .dropdown-wrapper(ng-class="{active: navIsActive}")
+      ul.dropdown-menu(role="navigation")
+        li(ng-repeat="syntax in syntaxes")
+          a(ng-href="#/syntaxes/{{syntax | encodeURIComponent}}") {{syntax}}
+.main-content
+  .at-a-glance
+    .stat-blocks
+      .stat-block-wrapper(ng-repeat="(label, data) in aggregate")
+        .stat-block(agg-stat)
+  .tabs-wrapper
+    nav.tabs
+      div
+        a(
+          ng-class="{current:$index===activeTabIndex}"
+          ng-repeat="tab in tabs track by $index"
+          ng-click="setTab($index)"
+        ) {{tab.label}}
+      .tabs-companion
+        .relative-wrapper
+          input#table-filter.with-icon-to-left(
+            type="search"
+            ng-model="tableFilter"
+            placeholder="search..."
+            aria-label="search..."
+          )
+          label.material-icons.icon-to-left(for="table-filter") search
+    div(ng-include="'ng-includes/'+tabTemplate")
+  .svg-tooltip

@@ -1,6 +1,7 @@
 'use strict';
 
 var srcPath = 'src/';
+var angularCDN = 'https://ajax.googleapis.com/ajax/libs/angularjs/';
 
 const uglifyJSFiles = {
   'main.min.js': ['main.min.js'],
@@ -9,12 +10,12 @@ const uglifyJSFiles = {
 const jadeFiles = [{
   expand: true,
   cwd: srcPath + 'templates/',
-  src: ['*.jade'],
+  src: ['*.jade', 'partials/*.jade'],
   dest: '',
   ext: '.html',
 }, {
   expand: true,
-  cwd: srcPath + 'templates/partials/',
+  cwd: srcPath + 'templates/ng-includes/',
   src: ['*.jade'],
   dest: 'ng-includes/',
   ext: '.html',
@@ -119,6 +120,7 @@ module.exports = function (grunt) {
         options: {
           data: {
             release: false,
+            angularCDN: angularCDN,
           },
         },
         files: jadeFiles,
@@ -127,6 +129,7 @@ module.exports = function (grunt) {
         options: {
           data: {
             release: true,
+            angularCDN: angularCDN,
           },
         },
         files: jadeFiles,
