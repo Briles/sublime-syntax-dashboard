@@ -14,4 +14,4 @@ table.typical-table
       ng-repeat="dependency in syntaxData.dependencies | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter"
     )
       td
-        a(ng-href="#/{{dependency | encodeURIComponent}}") {{dependency}}
+        a(ng-href="#/syntaxes/{{dependency | encodeURIComponent}}") {{dependency}}
