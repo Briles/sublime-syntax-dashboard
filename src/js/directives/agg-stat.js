@@ -1,6 +1,7 @@
 module.exports = function ($compile) {
   'use strict';
 
+  var utils = require('../lib/utils.js');
   var Graph = require('../lib/graph.js');
 
   return {
@@ -28,7 +29,7 @@ module.exports = function ($compile) {
           $element
             .empty()
             .append('<h3>' + labelVal + '</h3>')
-            .append('<h2>' + $scope.data + '</h2>')
+            .append('<h2>' + $scope.data.round(2) + '</h2>')
             .append($compile(graph.build())($scope)[0]);
         });
     },
