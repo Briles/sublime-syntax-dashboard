@@ -1,22 +1,3 @@
-#loading-bar {
-  transition: 200ms ease-in-out;
-  pointer-events: none;
-}
-
-#loading-bar .bar {
-  position: fixed;
-  z-index: 10002;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 3px;
-
-  transition: width 200ms;
-
-  background: $accent-color;
-}
-
 .header-wrapper {
   position: relative;
 
@@ -50,6 +31,9 @@
 
 .at-a-glance {
   background-color: $charcoal-2;
+  &.full {
+    min-height: calc(100vh - 58px);
+  }
 }
 
 .stat-blocks {

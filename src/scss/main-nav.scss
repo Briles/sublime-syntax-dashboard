@@ -1,0 +1,56 @@
+.main-menu {
+  position: relative;
+  z-index: 101;
+
+  display: block;
+
+  background-color: $primary-color;
+  ul {
+    display: flex;
+
+    padding: 0 $typical-distance;
+  }
+  li {
+    display: block;
+
+    padding-right: 31px;
+  }
+  a {
+    font-size: 15px;
+    font-weight: 500;
+
+    position: relative;
+
+    display: block;
+
+    padding: 17px 0;
+
+    transition: opacity 200ms ease-in-out;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+
+    opacity: .85;
+    color: white;
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 2px;
+
+      content: '';
+      transition: transform 200ms ease-in-out;
+      transform: scaleX(0);
+
+      background-color: white;
+    }
+
+    &.active, &:hover {
+      opacity: 1;
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

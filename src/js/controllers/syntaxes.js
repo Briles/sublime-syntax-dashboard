@@ -1,12 +1,9 @@
 module.exports = function ($scope, $http, $location, $route, Page) {
   'use strict';
 
-  Array.prototype.last = function () {
-    return this.slice(-1)[0];
-  };
+  var utils = require('../lib/utils.js');
 
   var lsCacheKey = 'ssdash_syntax_cache';
-  var angular = window.angular;
 
   $scope.syntaxes = require('../lib/syntaxes.js');
   var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
@@ -36,6 +33,7 @@ module.exports = function ($scope, $http, $location, $route, Page) {
     var aggregate = angular.copy($scope.syntaxData.history.last());
     delete aggregate.tag;
     $scope.aggregate = aggregate;
+    $scope.atAGlanceData = $scope.syntaxData.history;
 
     $scope.reports = {
       scopes: generateReport($scope.syntaxData.scopes),
@@ -52,8 +50,8 @@ module.exports = function ($scope, $http, $location, $route, Page) {
     } else {
       $http({
         method: 'GET',
-        url: 'src/data/' + encodeURIComponent(name) + '.json',
-      }).then(function successCallback(response) {
+        url: 'src/data/syntaxes/' + encodeURIComponent(name) + '.json',
+      }).then(function (response) {
         syntaxCache[name] = response.data;
         setSyntaxData(name);
         localStorage.setItem(lsCacheKey, angular.toJson(syntaxCache));
@@ -63,23 +61,11 @@ module.exports = function ($scope, $http, $location, $route, Page) {
 
   fetchSyntaxData($route.current.params.syntaxName);
 
-  function indexOfObject(arr, key, val) {
-    var idx = -1;
-    angular.forEach(arr, function (el, i) {
-      if (el[key] === val) {
-        idx = i;
-        return;
-      }
-    });
-
-    return idx;
-  }
-
   function generateReport(data) {
     var report = [];
 
     angular.forEach(data, function (value) {
-      var objIdx = indexOfObject(report, 'value', value);
+      var objIdx = utils.indexOfObject(report, 'value', value);
       if (objIdx === -1) {
         report.push({
           value: value,

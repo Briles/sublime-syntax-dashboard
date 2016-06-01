@@ -26,4 +26,18 @@ html(ng-app="syntaxDash")
       script(src=`${angularCDN}1.5.5/angular.min.js`)
       script(src=`${angularCDN}1.5.5/angular-route.min.js`)
     script(src="main.min.js")
-  body(ng-view)
+  body
+    nav.main-menu
+      ul
+        li
+          a(
+            href="#/aggregate"
+            ng-class="{active: currentView === 'aggregate'}"
+          ) Aggregate
+        li
+          a(
+            href="#/syntaxes/ActionScript"
+            ng-class="{active: currentView === 'syntaxes'}"
+          ) Syntaxes
+    div(ng-view)
+  .svg-tooltip

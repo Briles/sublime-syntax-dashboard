@@ -1,5 +1,19 @@
-'use strict';
+module.exports = (function () {
+  'use strict';
 
-Number.prototype.round = Number.prototype.round || function (decimals) {
-  return Number(Math.round(this + 'e' + decimals) + 'e-' + decimals);
-};
+  function indexOfObject(arr, key, val) {
+    var idx = -1;
+    angular.forEach(arr, function (el, i) {
+      if (el[key] === val) {
+        idx = i;
+        return;
+      }
+    });
+
+    return idx;
+  }
+
+  return {
+    indexOfObject: indexOfObject,
+  };
+}());

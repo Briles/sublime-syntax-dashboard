@@ -2,7 +2,11 @@ module.exports = function ($routeProvider) {
   $routeProvider
     .when('/syntaxes/:syntaxName', {
       templateUrl: 'partials/syntaxes.html',
-      controller: 'syntaxDashCtrl',
+      controller: 'syntaxesController',
     })
-    .otherwise('/syntaxes/ActionScript');
+    .when('/aggregate', {
+      templateUrl: 'partials/aggregate.html',
+      controller: 'aggregateController',
+    })
+    .otherwise('/aggregate');
 };

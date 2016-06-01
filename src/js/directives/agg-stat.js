@@ -1,7 +1,6 @@
 module.exports = function ($compile) {
   'use strict';
 
-  var utils = require('../lib/utils.js');
   var Graph = require('../lib/graph.js');
 
   return {
@@ -16,7 +15,7 @@ module.exports = function ($compile) {
           var labelVal = $scope.label;
 
           var graphConf = {
-            data: $scope.syntaxData.history,
+            data: $scope.atAGlanceData,
             height: 40,
             barMargin: 4,
             barWidth: 4,
