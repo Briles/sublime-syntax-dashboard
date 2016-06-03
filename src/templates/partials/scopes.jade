@@ -1,0 +1,47 @@
+.catch-all(ng-class="{active: navIsActive}" ng-click="toggleNav()")
+.header-wrapper
+  .dropdown-container
+    button.dropdown-initer.header-current-page(ng-click="toggleNav()") {{baseScope}}
+      i.material-icons expand_more
+    .dropdown-wrapper(ng-class="{active: navIsActive}")
+      ul.dropdown-menu(role="navigation")
+        li(ng-repeat="scope in baseScopes")
+          a(ng-href="#/scopes/{{scope | encodeURIComponent}}") {{scope}}
+.main-content
+  .tabs-wrapper
+    nav.tabs
+      div
+      .tabs-companion
+        .relative-wrapper
+          input#table-filter.with-icon-to-left(
+            type="search"
+            ng-model="tableFilter"
+            placeholder="search..."
+            aria-label="search..."
+          )
+          label.material-icons.icon-to-left(for="table-filter") search
+    div
+      table.typical-table
+        thead
+          tr
+            td
+              button.table-sort-button(
+                ng-click="orderBy('value')"
+                ng-class="sortStatus('value')"
+              ) Scope
+            td.table-measure
+              button.table-sort-button(
+                ng-click="orderBy('count')"
+                ng-class="sortStatus('count')"
+              ) Count
+        tbody
+          tr(ng-if="!(scopes | filter:tableFilter).length")
+            td {{syntax}} has no scopes
+              span(ng-if="tableFilter")= ' that match {{tableFilter}}'
+            td
+          tr(
+            ng-repeat="scope in scopes | orderBy:tableOrderBy:tableOrderRev | filter:tableFilter track by $index"
+          )
+            td {{scope.value}}
+            td.table-measure
+              span(ng-if="scope.count > 1") {{scope.count}}

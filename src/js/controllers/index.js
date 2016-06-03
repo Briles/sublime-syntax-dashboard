@@ -6,6 +6,7 @@ app
   .factory('Page', require('../services/page.js'))
   .controller('aggregateController', require('./aggregate.js'))
   .controller('syntaxesController', require('./syntaxes.js'))
+  .controller('scopesController', require('./scopes.js'))
   .directive('svgTooltip', require('../directives/tooltip.js'))
   .directive('aggStat', require('../directives/agg-stat.js'))
   .directive('mainNavItem', require('../directives/main-nav-item.js'))

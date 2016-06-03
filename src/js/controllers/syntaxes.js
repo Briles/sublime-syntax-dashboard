@@ -36,8 +36,8 @@ module.exports = function ($scope, $http, $location, $route, Page) {
     $scope.atAGlanceData = $scope.syntaxData.history;
 
     $scope.reports = {
-      scopes: generateReport($scope.syntaxData.scopes),
-      includes: generateReport($scope.syntaxData.includes),
+      scopes: utils.generateReport($scope.syntaxData.scopes),
+      includes: utils.generateReport($scope.syntaxData.includes),
     };
   }
 
@@ -60,24 +60,6 @@ module.exports = function ($scope, $http, $location, $route, Page) {
   }
 
   fetchSyntaxData($route.current.params.syntaxName);
-
-  function generateReport(data) {
-    var report = [];
-
-    angular.forEach(data, function (value) {
-      var objIdx = utils.indexOfObject(report, 'value', value);
-      if (objIdx === -1) {
-        report.push({
-          value: value,
-          count: 1,
-        });
-      } else {
-        report[objIdx].count += 1;
-      }
-    });
-
-    return report;
-  }
 
   $scope.sortStatus = function (key) {
     var isCurrentKey = $scope.tableOrderBy === key;

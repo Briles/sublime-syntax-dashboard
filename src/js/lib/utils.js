@@ -13,7 +13,26 @@ module.exports = (function () {
     return idx;
   }
 
+  function generateReport(data) {
+    var report = [];
+
+    angular.forEach(data, function (value) {
+      var objIdx = indexOfObject(report, 'value', value);
+      if (objIdx === -1) {
+        report.push({
+          value: value,
+          count: 1,
+        });
+      } else {
+        report[objIdx].count += 1;
+      }
+    });
+
+    return report;
+  }
+
   return {
     indexOfObject: indexOfObject,
+    generateReport: generateReport,
   };
 }());
