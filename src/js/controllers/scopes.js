@@ -13,6 +13,7 @@ module.exports = function ($scope, $http, $location, $route, Page) {
   $scope.tableOrderRev = false;
 
   function setScopeData(name) {
+    console.log(name);
     $scope.navIsActive = false;
     $scope.scopeData = baseScopeCache[name];
     var scopeName = name;
@@ -23,15 +24,15 @@ module.exports = function ($scope, $http, $location, $route, Page) {
   }
 
   function fetchscopeData(name) {
-    name = name.toLowerCase();
-    name = name in $scope.baseScopes ? $scope.baseScopes[name] : 'Comment';
+    var lName = name.toLowerCase();
+    name = lName in $scope.baseScopes ? $scope.baseScopes[lName] : 'Comment';
 
     if (name in baseScopeCache) {
       setScopeData(name);
     } else {
       $http({
         method: 'GET',
-        url: 'src/data/scopes/' + encodeURIComponent(name) + '.json',
+        url: 'src/data/scopes/' + encodeURIComponent(lName) + '.json',
       }).then(function (response) {
         baseScopeCache[name] = response.data;
         setScopeData(name);
