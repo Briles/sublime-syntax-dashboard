@@ -9,8 +9,8 @@ module.exports = function ($scope, $http, $location, $route, Page) {
   var baseScopeCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
 
   $scope.tableFilter = '';
-  $scope.tableOrderBy = 'value';
-  $scope.tableOrderRev = false;
+  $scope.tableOrderBy = 'count';
+  $scope.tableOrderRev = true;
 
   function setScopeData(name) {
     console.log(name);
