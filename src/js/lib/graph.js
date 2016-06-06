@@ -72,7 +72,7 @@
     var ns = 'http://www.w3.org/2000/svg';
 
     var svg = document.createElementNS(ns, 'svg');
-    svg.classList = 'svg-graph ' + this.color;
+    svg.setAttribute('class', 'svg-graph ' + this.color);
     svg.setAttribute('width', this.width);
     svg.setAttribute('height', this.height);
     var barWrapper = document.createElementNS(ns, 'g');
