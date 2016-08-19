@@ -1,1 +1,1 @@
-module.exports={"scopes":123,"unique scopes":52,"includes":55,"unique includes":13,"patterns":83,"unique patterns":41,"avg. specificity":4};
+module.exports={"scopes":125,"unique scopes":53,"includes":57,"unique includes":14,"patterns":86,"unique patterns":41,"avg. specificity":4};
