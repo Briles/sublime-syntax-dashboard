@@ -21,6 +21,8 @@ h1, h2, h3 {
 }
 
 button {
+  font-family: $--font-stack-sans;
+
   cursor: pointer;
 
   border: 0;
@@ -37,27 +39,27 @@ rect {
 }
 
 // Chrome/Safari/Opera
-&::-webkit-input-placeholder {
+::-webkit-input-placeholder {
   opacity: 1;
 }
 
 // Firefox <= 18
-&:-moz-placeholder {
+:-moz-placeholder {
   opacity: 1;
 }
 
 // Firefox > 18
-&::-moz-placeholder {
+::-moz-placeholder {
   opacity: 1;
 }
 
 // Edge (also supports Webkit)
-&::-ms-input-placeholder {
+::-ms-input-placeholder {
   opacity: 1;
 }
 
 // IE 10/11
-&:-ms-input-placeholder {
+:-ms-input-placeholder {
   opacity: 1;
 }
 
@@ -71,6 +73,7 @@ input {
     transition: all 175ms ease-in-out;
   };
 
+  font-family: $--font-stack-sans;
   line-height: $height;
 
   height: $height;
