@@ -1,4 +1,4 @@
-module.exports = function ($compile) {
+module.exports = function ($compile, $timeout) {
   'use strict';
 
   var Graph = require('../lib/graph.js');
@@ -25,11 +25,24 @@ module.exports = function ($compile) {
           var graph = new Graph.Bar(graphConf);
           graph.setColor($scope.$index);
 
+          var graphEl = $compile(graph.build())($scope)[0];
+          var graphContainer = document.createElement('div');
+          graphContainer.style.width = '100%';
+          graphContainer.style.height = graphConf.height + 20 + 'px';
+          graphContainer.style.overflow = 'hidden';
+          graphContainer.style['overflow-x'] = 'auto';
+          graphContainer.appendChild(graphEl);
+
           $element
             .empty()
             .append('<h3>' + labelVal + '</h3>')
             .append('<h2>' + $scope.data.round(2) + '</h2>')
-            .append($compile(graph.build())($scope)[0]);
+            .append(graphContainer);
+
+          var timeout = $timeout(function () {
+            graphContainer.scrollLeft = graphEl.getAttribute('width');
+            $timeout.cancel(timeout);
+          });
         });
     },
   };

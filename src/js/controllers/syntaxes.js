@@ -6,7 +6,7 @@ module.exports = function ($scope, $http, $location, $route, Page) {
   var lsCacheKey = 'ssdash_syntax_cache';
 
   $scope.syntaxes = require('../lib/syntaxes.js');
-  var syntaxCache = angular.fromJson(localStorage.getItem(lsCacheKey)) || {};
+  var syntaxCache = {};
 
   $scope.tableFilter = '';
   $scope.tableOrderBy = 'value';
@@ -54,7 +54,6 @@ module.exports = function ($scope, $http, $location, $route, Page) {
       }).then(function (response) {
         syntaxCache[name] = response.data;
         setSyntaxData(name);
-        localStorage.setItem(lsCacheKey, angular.toJson(syntaxCache));
       });
     }
   }
